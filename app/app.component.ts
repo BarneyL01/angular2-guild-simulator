@@ -2,6 +2,9 @@ import {Component} from 'angular2/core';
 import {Hero} from './hero';
 import {HeroDetailComponent} from './hero-detail.component';
 
+/**
+ * Just adding a comment
+ */
 @Component({
     selector: 'my-app',
     template: `
