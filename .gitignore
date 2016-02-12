@@ -52,3 +52,4 @@ typings
 app/**/*.js
 app/**/*.map
 node_modules
+node_modules/.bin/concurrent
