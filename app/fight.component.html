@@ -1,6 +1,18 @@
 <h3>Fight Result</h3>
 <button (click)="addHit(hitStub())">Add Hit</button>
-<div class="grid grid-pad">
+
+<select #select1 [ngModel]="heroes" (change)="setHero1($event.target.value)">
+    <option *ngFor="#hero of heroes" [value]="hero.id">{{hero.name}}</option>
+</select>
+<select #select2 [ngModel]="heroes" (change)="setHero2($event.target.value)">
+    <option *ngFor="#hero of heroes" [value]="hero.id">{{hero.name}}</option>
+</select>
+
+<div *ngIf="selectedHero1">Hero 1: {{selectedHero1.name}}</div>
+<div *ngIf="selectedHero2">Hero 2: {{selectedHero2.name}}</div>
+
+<!--Fight Result text:-->
+<div>
     <div *ngFor="#fightResult of fightResults"  >
         <div *ngIf="fightResult.hitConnected">            
             {{fightResult.attacker}} hit 
