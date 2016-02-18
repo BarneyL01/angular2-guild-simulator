@@ -1,14 +1,29 @@
 import {Hero} from './hero';
 
 export var HEROES: Hero[] = [
-    {"id": 11, "name": "Mr. Nice"},
-    {"id": 12, "name": "Narco"},
-    {"id": 13, "name": "Bombasto"},
-    {"id": 14, "name": "Celeritas"},
-    {"id": 15, "name": "Magneta"},
-    {"id": 16, "name": "RubberMan"},
-    {"id": 17, "name": "Dynama"},
-    {"id": 18, "name": "Dr IQ"},
-    {"id": 19, "name": "Magma"},
-    {"id": 20, "name": "Tornado"}
+    {"id": 11, 
+        "name": "Mr. Nice",  
+        "strength": 1,
+        "dexterity": 2,
+        "hitPoints":10,
+        "maxHitPoints":10,
+        "attackSpeed": 4
+    },
+    {"id": 12, 
+        "name": "Narco",
+        "strength": 2,
+        "dexterity": 1,
+        "hitPoints":11,
+        "maxHitPoints":11,
+        "attackSpeed": 4
+    },
+    {"id": 13, 
+        "name": "Bombasto",
+        "strength": 1,
+        "dexterity": 1,
+        "hitPoints":8,
+        "maxHitPoints":8,
+        "attackSpeed": 3
+    },
+
 ];
