@@ -7,19 +7,23 @@ import { Hit } from './hit';
 import { FightEngine } from './fight-engine';
 
 @Component({
-  selector: 'my-fight',
-  templateUrl : 'app/fight.component.html',
+  selector: 'my-duel',
+  templateUrl : 'app/duel.component.html',
   directives: [] 
   //,
   //styleUrls: ['app/fight.component.css']
 })
 
-export class FightComponent implements OnInit {
+export class DuelComponent implements OnInit {
     heroes: Hero[] = [];
     fightResults: Hit[] = [];
+    fightError:boolean = false;
+    fightStarted:boolean = false;
     
     selectedHero1:Hero;
     selectedHero2:Hero;
+    
+    fightEngine:FightEngine;
     
     constructor(
         private _router: Router,
@@ -31,10 +35,6 @@ export class FightComponent implements OnInit {
          
     }
     
-    startFight()
-    {
-        
-    }
 /*    gotoDetail(hero: Hero) {
         let link = ['HeroDetail', { id: hero.id }];
         this._router.navigate(link);
@@ -71,6 +71,20 @@ export class FightComponent implements OnInit {
     }
     setHero2(id:number){
         this.selectedHero2 = this.getHeroById(id);
+    }
+    
+    startFight(){
+        if(this.selectedHero1 == null || this.selectedHero2 == null)
+        {
+            this.fightError=true;
+        }else{
+            this.fightError=false;
+            this.fightStarted = true;
+            
+            this.fightEngine = new FightEngine(this.selectedHero1, this.selectedHero2);
+            this.fightResults = this.fightEngine.fight();
+        }
+        
     }
     
     

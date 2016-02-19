@@ -1,5 +1,5 @@
-<h3>Fight Result</h3>
-<button (click)="addHit(hitStub())">Add Hit</button>
+<h3>Duel Result</h3>
+
 
 <select #select1 [ngModel]="heroes" (change)="setHero1($event.target.value)">
     <option *ngFor="#hero of heroes" [value]="hero.id">{{hero.name}}</option>
@@ -11,8 +11,14 @@
 <div *ngIf="selectedHero1">Hero 1: {{selectedHero1.name}}</div>
 <div *ngIf="selectedHero2">Hero 2: {{selectedHero2.name}}</div>
 
-<!--Fight Result text:-->
 <div>
+<button (click)="startFight()">Start Fight</button>
+</div>
+<br>
+<!--Fight Result text:-->
+<div *ngIf="fightError">Error, one or both heroes not selected.</div>
+
+<div *ngIf="fightStarted">Fight Started!
     <div *ngFor="#fightResult of fightResults"  >
         <div *ngIf="fightResult.hitConnected">            
             {{fightResult.attacker}} hit 
@@ -26,5 +32,11 @@
             {{fightResult.defender}}.
             
         </div>
+    </div>
+    <div *ngIf="selectedHero1.hitPoints <= 0" >
+        {{selectedHero1.name}} is Dead.
+    </div>
+    <div *ngIf="selectedHero2.hitPoints <= 0" >
+        {{selectedHero2.name}} is Dead.
     </div>
 </div>

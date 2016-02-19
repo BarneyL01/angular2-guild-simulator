@@ -7,7 +7,8 @@ export var HEROES: Hero[] = [
         "dexterity": 2,
         "hitPoints":10,
         "maxHitPoints":10,
-        "attackSpeed": 4
+        "attackSpeed": 4,
+        "experience":0
     },
     {"id": 12, 
         "name": "Narco",
@@ -15,7 +16,8 @@ export var HEROES: Hero[] = [
         "dexterity": 1,
         "hitPoints":11,
         "maxHitPoints":11,
-        "attackSpeed": 4
+        "attackSpeed": 4,
+        "experience":0
     },
     {"id": 13, 
         "name": "Bombasto",
@@ -23,7 +25,8 @@ export var HEROES: Hero[] = [
         "dexterity": 1,
         "hitPoints":8,
         "maxHitPoints":8,
-        "attackSpeed": 3
+        "attackSpeed": 3,
+        "experience":0
     },
 
 ];
