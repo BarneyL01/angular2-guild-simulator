@@ -5,7 +5,7 @@ import { Hero } from './hero';
 import { HeroService } from './hero.service';
 import { Hit } from './hit';
 import { FightEngine } from './fight-engine';
-import HeroListProcessor from './hero-list-processor';
+import HeroUtils from './hero-utils';
 
 @Component({
   selector: 'my-duel',
@@ -18,7 +18,11 @@ import HeroListProcessor from './hero-list-processor';
 export class DuelComponent implements OnInit {
     heroes: Hero[] = [];
     fightResults: Hit[] = [];
+    
+    heroUnselected:boolean = false;
+    sameHeroSelected:boolean = false;
     fightError:boolean = false;
+    
     fightStarted:boolean = false;
     
     selectedHero1:Hero;
@@ -58,24 +62,30 @@ export class DuelComponent implements OnInit {
     */
     setHero1(id:number){
         // console.log('heroId', id);
-        this.selectedHero1 = HeroListProcessor.getById(this.heroes,id);
+        this.selectedHero1 = HeroUtils.getById(this.heroes,id);
         //   console.log('selectedHero1', this.selectedHero1.name);
     }
     
     setHero2(id:number){
-        this.selectedHero2 = HeroListProcessor.getById(this.heroes,id);
+        this.selectedHero2 = HeroUtils.getById(this.heroes,id);
     }
     
     startFight(){
-        if(this.selectedHero1 == null || this.selectedHero2 == null)
+        this.heroUnselected = (this.selectedHero1 == null || this.selectedHero2 == null);
+        this.sameHeroSelected = HeroUtils.isSameHero(this.selectedHero1, this.selectedHero2);
+        
+        if(this.heroUnselected || this.sameHeroSelected)
         {
             this.fightError=true;
+            this.fightStarted = false;
         }else{
             this.fightError=false;
             this.fightStarted = true;
             
             this.fightEngine = new FightEngine(this.selectedHero1, this.selectedHero2);
-            this.fightResults = this.fightEngine.fight();
+            this.fightResults = this.fightEngine.fight(); 
+            
+            
         }
         
     }

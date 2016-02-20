@@ -8,7 +8,7 @@ import { Hero } from './hero';
     
     http://www.sitepoint.com/understanding-es6-modules/
 */
-var HeroListProcessor = {
+var HeroUtils = {
     
     getById: function(heroes:Hero[], id:number):Hero{
         
@@ -19,7 +19,13 @@ var HeroListProcessor = {
             }
         }
         return ;
+    },
+    
+    isSameHero: function(hero1:Hero, hero2:Hero){
+        if(hero1 == null || hero2 == null) return false;
+        
+        return (hero1.id == hero2.id);
     }
 }
 
-export default HeroListProcessor;
+export default HeroUtils;

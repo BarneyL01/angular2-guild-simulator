@@ -16,7 +16,10 @@
 </div>
 <br>
 <!--Fight Result text:-->
-<div *ngIf="fightError">Error, one or both heroes not selected.</div>
+<div *ngIf="fightError">
+    <div *ngIf="heroUnselected">Problem, one or both heroes not selected.</div>
+    <div *ngIf="sameHeroSelected">Problem, duel of the same hero ?!</div>
+</div>
 
 <div *ngIf="fightStarted">Fight Started!
     <div *ngFor="#fightResult of fightResults"  >
