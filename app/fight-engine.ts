@@ -1,6 +1,7 @@
 import { Creature } from './creature';
 // import { HeroService } from './hero.service';
 import { Hit } from './hit';
+import CreatureUtils from './creature-utils'
 
 export class FightEngine {
     creature1:Creature;
@@ -47,7 +48,8 @@ export class FightEngine {
     }
     
     checkCreatureDeath(){
-        return (this.creature1.hitPoints <= 0 || this.creature2.hitPoints <= 0);
+        return (CreatureUtils.isDead(this.creature1) || 
+                CreatureUtils.isDead(this.creature2));
     }
     
     creatureAttack(attacker:Creature, defender:Creature):Hit{

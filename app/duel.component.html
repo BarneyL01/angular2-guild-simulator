@@ -16,9 +16,11 @@
 </div>
 <br>
 <!--Fight Result text:-->
-<div *ngIf="fightError">
+<div *ngIf="fightError">Problem with duel:
     <div *ngIf="heroUnselected">Problem, one or both heroes not selected.</div>
     <div *ngIf="sameHeroSelected">Problem, duel of the same hero ?!</div>
+    <div *ngIf="selectedHero1IsDead">Problem, {{selectedHero1.name}} is dead.</div>
+    <div *ngIf="selectedHero2IsDead">Problem, {{selectedHero2.name}} is dead.</div>
 </div>
 
 <div *ngIf="fightStarted">Fight Started!

@@ -6,6 +6,7 @@ import { HeroService } from './hero.service';
 import { Hit } from './hit';
 import { FightEngine } from './fight-engine';
 import HeroUtils from './hero-utils';
+import CreatureUtils from './creature-utils'
 
 @Component({
   selector: 'my-duel',
@@ -21,7 +22,9 @@ export class DuelComponent implements OnInit {
     
     heroUnselected:boolean = false;
     sameHeroSelected:boolean = false;
-    fightError:boolean = false;
+    duelError:boolean = false;
+    selectedHero1IsDead:boolean = false;
+    selectedHero2IsDead:boolean = false;
     
     fightStarted:boolean = false;
     
@@ -73,13 +76,18 @@ export class DuelComponent implements OnInit {
     startFight(){
         this.heroUnselected = (this.selectedHero1 == null || this.selectedHero2 == null);
         this.sameHeroSelected = HeroUtils.isSameHero(this.selectedHero1, this.selectedHero2);
+        this.selectedHero1IsDead = CreatureUtils.isDead(this.selectedHero1);
+        this.selectedHero2IsDead = CreatureUtils.isDead(this.selectedHero2);
         
-        if(this.heroUnselected || this.sameHeroSelected)
+        
+        // check for selection, then start fight.
+        if(this.heroUnselected || this.sameHeroSelected ||
+           this.selectedHero1IsDead ||  this.selectedHero2IsDead)
         {
-            this.fightError=true;
+            this.duelError=true;
             this.fightStarted = false;
         }else{
-            this.fightError=false;
+            this.duelError=false;
             this.fightStarted = true;
             
             this.fightEngine = new FightEngine(this.selectedHero1, this.selectedHero2);
@@ -87,6 +95,7 @@ export class DuelComponent implements OnInit {
             
             
         }
+        
         
     }
     
