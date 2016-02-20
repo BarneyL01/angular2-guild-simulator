@@ -3,7 +3,7 @@ import { Router } from 'angular2/router';
 
 import { Hero } from './hero';
 import { HeroService } from './hero.service';
-
+import {HeroContainer} from './hero-container';
 
 @Component({
   selector: 'my-dashboard',
@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit() {
         this._heroService.getHeroes()
-      .then(heroes => this.heroes = heroes.slice(1,5));
+      .then(heroes => this.heroes = heroes.heroes.slice(1,5));
     }
     gotoDetail(hero: Hero) {
         let link = ['HeroDetail', { id: hero.id }];

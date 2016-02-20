@@ -3,7 +3,7 @@ import { Router } from 'angular2/router';
 import {Hero} from './hero';
 import {HeroDetailComponent} from './hero-detail.component';
 import {HeroService} from './hero.service';
-
+import {HeroContainer} from './hero-container';
 /**
  * Just adding a comment
  */
@@ -21,7 +21,7 @@ import {HeroService} from './hero.service';
 })
 
 export class HeroesComponent implements OnInit {
-  heroes: Hero[];
+  heroes: HeroContainer;
   selectedHero: Hero;
   constructor(
     private _router: Router,
