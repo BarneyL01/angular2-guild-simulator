@@ -52,5 +52,5 @@ import { DuelComponent } from './duel.component';
 ])
 
 export class AppComponent {
-    title = 'Tour of Heroes';
+    title = 'Guild Simulator';
 }

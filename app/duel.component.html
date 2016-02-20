@@ -24,24 +24,33 @@
 </div>
 
 <div *ngIf="fightStarted">Fight Started!
-    <div *ngFor="#fightResult of fightResults"  >
-        <div *ngIf="fightResult.hitConnected">            
-            {{fightResult.attacker}} hit 
-            {{fightResult.defender}} for 
-            {{fightResult.damage}} damage,
-            {{fightResult.remainingHp}} remaining HPs.
+    <div *ngFor="#fightCommentary of fightCommentarys"  >
+        <div *ngIf="fightCommentary.hitConnected">            
+            {{fightCommentary.attacker}} hit 
+            {{fightCommentary.defender}} for 
+            {{fightCommentary.damage}} damage,
+            {{fightCommentary.remainingHp}} remaining HPs.
             
         </div>
-        <div *ngIf="!fightResult.hitConnected">            
-            {{fightResult.attacker}} missed 
-            {{fightResult.defender}}.
+        <div *ngIf="!fightCommentary.hitConnected">            
+            {{fightCommentary.attacker}} missed 
+            {{fightCommentary.defender}}.
             
         </div>
     </div>
-    <div *ngIf="selectedHero1.hitPoints <= 0" >
+    <div *ngIf="selectedHero1IsDead" >
         {{selectedHero1.name}} is Dead.
     </div>
-    <div *ngIf="selectedHero2.hitPoints <= 0" >
+    <div *ngIf="selectedHero2IsDead" >
         {{selectedHero2.name}} is Dead.
+    </div>
+    <br>
+    <div *ngIf="fightResult"> Duel Ended:
+        <div *ngIf="fightResult.resultTie" >
+            Duel ended in a tie.     
+        </div>
+        <div *ngIf="!fightResult.resultTie" >
+            {{fightResult.winner}} defeated {{fightResult.loser}}. {{fightResult.winner}} gained {{fightResult.experienceGained}} xp.
+        </div>
     </div>
 </div>

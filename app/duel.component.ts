@@ -5,6 +5,7 @@ import { Hero } from './hero';
 import { HeroService } from './hero.service';
 import { Hit } from './hit';
 import { FightEngine } from './fight-engine';
+import {FightResult} from './fight-result';
 import HeroUtils from './hero-utils';
 import CreatureUtils from './creature-utils'
 
@@ -18,7 +19,8 @@ import CreatureUtils from './creature-utils'
 
 export class DuelComponent implements OnInit {
     heroes: Hero[] = [];
-    fightResults: Hit[] = [];
+    fightCommentarys: Hit[] = [];
+    fightResult: FightResult;
     
     heroUnselected:boolean = false;
     sameHeroSelected:boolean = false;
@@ -49,7 +51,7 @@ export class DuelComponent implements OnInit {
     }*/
     
     addHit(hit:Hit){
-        this.fightResults.push(hit);
+        this.fightCommentarys.push(hit);
     }
     
     hitStub():Hit{
@@ -90,10 +92,12 @@ export class DuelComponent implements OnInit {
             this.duelError=false;
             this.fightStarted = true;
             
-            this.fightEngine = new FightEngine(this.selectedHero1, this.selectedHero2);
-            this.fightResults = this.fightEngine.fight(); 
+            this.fightEngine = new FightEngine(this.selectedHero1, this.selectedHero2, this.fightCommentarys);
+            // this.fightCommentarys = this.fightEngine.fight(); 
+            this.fightResult = this.fightEngine.fight();
             
-            
+            this.selectedHero1IsDead = CreatureUtils.isDead(this.selectedHero1);
+            this.selectedHero2IsDead = CreatureUtils.isDead(this.selectedHero2);
         }
         
         

@@ -13,8 +13,14 @@ var CreatureUtils = {
         if(creature == null) return false;
         
         return (creature.hitPoints <= 0);
-    }
+    },
     
+    // Safer way, as experienceIfKilled is optional:
+    getExperienceIfKilled: function (creature:Creature){
+        if(creature == null) return 0;
+        if(creature.experienceIfKilled == null) return 0;
+        return creature.experienceIfKilled;
+    }
 }
 
 export default CreatureUtils;

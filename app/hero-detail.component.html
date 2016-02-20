@@ -1,25 +1,38 @@
 <div *ngIf="hero">
-  <h2>{{hero.name}} details!</h2>
-  <div>
-    <label>id: </label>{{hero.id}}</div>
-  <div>
-    <label>name: </label>
-    <input [(ngModel)]="hero.name" placeholder="name" />
-  </div>
-  <div>
-    <label>strength: </label>{{hero.strength}}</div>
-  <div>
-  <div>
-    <label>dexterity: </label>{{hero.dexterity}}</div>
-  <div>
-  <div>
-    <label>hitPoints: </label>{{hero.hitPoints}}</div>
-  <div>
-  <div>
-    <label>maxHitPoints: </label>{{hero.maxHitPoints}}</div>
-  <div>
-  <div>
-    <label>attackSpeed: </label>{{hero.attackSpeed}}</div>
-  <div>
-  <button (click)="goBack()">Back</button>
+    <h2>{{hero.name}} details!</h2>
+    <div>
+        <label>id: </label>{{hero.id}}</div>
+    <div>
+        <label>name: </label>
+        <input [(ngModel)]="hero.name" placeholder="name" />
+    </div>
+    <div>
+        <label>strength: </label>{{hero.strength}}</div>
+    <div>
+    <div>
+        <label>dexterity: </label>{{hero.dexterity}}</div>
+    <div>
+    <div>
+        <label>hitPoints: </label>{{hero.hitPoints}}</div>
+    <div>
+    <div>
+        <label>maxHitPoints: </label>{{hero.maxHitPoints}}</div>
+    <div>
+    <div>
+        <label>attackSpeed: </label>{{hero.attackSpeed}}</div>
+    <div>
+    <div>
+        <label>experience points: </label>{{hero.experience}}</div>
+    <div>
+    <div *ngIf="hero.duelWins">
+        <label>Wins (duel): </label>{{hero.duelWins}}</div>
+    <div>        
+    <div *ngIf="hero.duelLosses">
+        <label>Losses (duel): </label>{{hero.duelLosses}}</div>
+    <div>        
+    <div *ngIf="hero.rank">
+        <label>rank: </label>{{hero.rank}}</div>
+    <div>  
+                
+    <button (click)="goBack()">Back</button>
 </div>
