@@ -5,6 +5,7 @@ import { Hero } from './hero';
 import { HeroService } from './hero.service';
 import { Hit } from './hit';
 import { FightEngine } from './fight-engine';
+import HeroListProcessor from './hero-list-processor';
 
 @Component({
   selector: 'my-duel',
@@ -55,22 +56,14 @@ export class DuelComponent implements OnInit {
     /*
         Need this function because selector doesn't seem to bind properly.
     */
-    getHeroById(id:number){
-        for(let hero of this.heroes){
-            // console.log('hero ', hero.id, ':', hero.name);
-            if(hero.id==id){
-                return hero;
-            }
-        }
-        return ;
-    }
     setHero1(id:number){
         // console.log('heroId', id);
-        this.selectedHero1 = this.getHeroById(id);
+        this.selectedHero1 = HeroListProcessor.getById(this.heroes,id);
         //   console.log('selectedHero1', this.selectedHero1.name);
     }
+    
     setHero2(id:number){
-        this.selectedHero2 = this.getHeroById(id);
+        this.selectedHero2 = HeroListProcessor.getById(this.heroes,id);
     }
     
     startFight(){

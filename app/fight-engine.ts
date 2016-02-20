@@ -47,11 +47,7 @@ export class FightEngine {
     }
     
     checkCreatureDeath(){
-        if(this.creature1.hitPoints <= 0 || this.creature2.hitPoints <= 0) 
-        {
-            return true;
-        }
-        return false;
+        return (this.creature1.hitPoints <= 0 || this.creature2.hitPoints <= 0);
     }
     
     creatureAttack(attacker:Creature, defender:Creature):Hit{
