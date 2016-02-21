@@ -32,10 +32,17 @@ export class DungeonComponent implements OnInit {
     selectedHero:Hero;
     selectedDungeon:Dungeon;
     
+    fightEngine:FightEngine;
+    
     heroUnselected:boolean = false;
     dungeonUnselected:boolean = false;
     enterDungeonError:boolean = false;
     selectedHeroIsDead:boolean = false;
+    
+    activeMonsterIsDead:boolean = false;
+    
+    // Change this later:
+    fightStarted:boolean  = false;
     
     // @ViewChild(Selection) selectHero:Selection;
     dungeonStarted:boolean = false;
@@ -76,7 +83,27 @@ export class DungeonComponent implements OnInit {
         
         if(!this.enterDungeonError){
             this.dungeonStarted = true;
+            
+            // TODO: add stepper (decision to keep fighting, queue next monster)
+            // Create new monster copy. Currently a pointer to a monster.
             this.activeMonster = DungeonUtils.getMonster(this.selectedDungeon, this.monsters);
+            this.fightStarted = true;
+            // clear existing fight commentary: 
+            this.fightCommentarys = [];
+
+            this.fightEngine = new FightEngine(this.selectedHero, this.activeMonster, this.fightCommentarys);
+            // this.fightCommentarys = this.fightEngine.fight(); 
+            
+            this.resolveFightResults();
         }
+    }
+    
+    resolveFightResults() {
+        this.fightResult = this.fightEngine.fight();
+
+        this.selectedHeroIsDead = CreatureUtils.isDead(this.selectedHero);
+        this.activeMonsterIsDead = CreatureUtils.isDead(this.activeMonster);
+
+        // TODO: Implement experience gain -- probably put this in FightEngine
     }
 }

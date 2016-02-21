@@ -33,48 +33,41 @@
         <div *ngIf="fightStarted">Fight Started!
             <div *ngFor="#fightCommentary of fightCommentarys"  >
                 <div *ngIf="fightCommentary.hitConnected">            
-                    <span [ngClass]="{hero1name:fightCommentary.attacker.id == selectedHero1.id, 
-                                      hero2name:fightCommentary.attacker.id == selectedHero2.id}">
+                    <span [ngClass]="{heroName:fightCommentary.attacker.id == selectedHero.id}">
                         {{fightCommentary.attacker.name}}</span> hit 
-                    <span [ngClass]="{hero1name:fightCommentary.defender.id == selectedHero1.id, 
-                                      hero2name:fightCommentary.defender.id == selectedHero2.id}">
+                    <span [ngClass]="{heroName:fightCommentary.attacker.id == selectedHero.id}">
                         {{fightCommentary.defender.name}}</span> for 
                     {{fightCommentary.damage}} damage,
                     {{fightCommentary.remainingHp}} remaining HPs.
                     
                 </div>
                 <div *ngIf="!fightCommentary.hitConnected">            
-                    <span [ngClass]="{hero1name:fightCommentary.attacker.id == selectedHero1.id, 
-                                      hero2name:fightCommentary.attacker.id == selectedHero2.id}">
+                    <span [ngClass]="{heroName:fightCommentary.attacker.id == selectedHero.id}">
                         {{fightCommentary.attacker.name}}</span> missed 
-                    <span [ngClass]="{hero1name:fightCommentary.defender.id == selectedHero1.id, 
-                                      hero2name:fightCommentary.defender.id == selectedHero2.id}">
+                    <span [ngClass]="{heroName:fightCommentary.attacker.id == selectedHero.id}">
                         {{fightCommentary.defender.name}}</span>.
                     
                 </div>
             </div>
-            <div *ngIf="selectedHero1IsDead" class="hero1name">
-                {{selectedHero1.name}} is Dead.
+            <div *ngIf="selectedHeroIsDead" class="heroName">
+                {{selectedHero.name}} is Dead.
             </div>
-            <div *ngIf="selectedHero2IsDead" class="hero2name">
-                {{selectedHero2.name}} is Dead.
+            <div *ngIf="activeMonsterIsDead" class="monsterName">
+                {{activeMonster.name}} is Dead.
             </div>
             <br>
-            <div *ngIf="fightResult"> Duel Ended:
+            <div *ngIf="fightResult"> Fight Ended:
                 <div *ngIf="fightResult.resultTie" >
-                    Duel ended in a tie.     
+                    Fight ended in a tie.     
                 </div>
                 <div *ngIf="!fightResult.resultTie" >
-                    <span [ngClass]="{hero1name:fightResult.winner.id == selectedHero1.id, 
-                                      hero2name:fightResult.winner.id == selectedHero2.id}">
+                    <span >
                                       {{fightResult.winner.name}} </span>
                                       defeated 
-                    <span [ngClass]="{hero1name:fightResult.loser.id == selectedHero1.id, 
-                                      hero2name:fightResult.loser.id == selectedHero2.id}">
+                    <span >
                                       {{fightResult.loser.name}}.
                                       </span>
-                   <span [ngClass]="{hero1name:fightResult.winner.id == selectedHero1.id, 
-                                      hero2name:fightResult.winner.id == selectedHero2.id}">
+                   <span >
                                        {{fightResult.winner.name}} 
                                        </span>
                                        gained {{fightResult.experienceGained}} xp.
