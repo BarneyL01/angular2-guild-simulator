@@ -5,6 +5,9 @@ import { DashboardComponent } from './dashboard.component';
 import { HeroesComponent } from './heroes.component';
 import { HeroDetailComponent } from './hero-detail.component';
 import { DuelComponent } from './duel.component';
+import { DungeonComponent } from './dungeon.component';
+import { MonsterService } from './monster.service';
+import { DungeonService } from './dungeon.service';
 
 @Component({
     selector: 'my-app',
@@ -14,6 +17,7 @@ import { DuelComponent } from './duel.component';
             <a [routerLink]="['Dashboard']">Dashboard</a>
             <a [routerLink]="['Heroes']">The Guild</a>
             <a [routerLink]="['Duel']">Duel</a>
+            <a [routerLink]="['Dungeon']">Dungeon</a>
         </nav>
         <router-outlet></router-outlet>
         `,
@@ -21,7 +25,9 @@ import { DuelComponent } from './duel.component';
     directives: [ROUTER_DIRECTIVES],
     providers: [
         ROUTER_PROVIDERS,
-        HeroService
+        HeroService,
+        MonsterService,
+        DungeonService
     ]
 
 })
@@ -46,6 +52,11 @@ import { DuelComponent } from './duel.component';
         path: '/duel',
         name: 'Duel',
         component: DuelComponent
+    },
+    {
+        path: '/dungeon',
+        name: 'Dungeon',
+        component: DungeonComponent
     }
 
 

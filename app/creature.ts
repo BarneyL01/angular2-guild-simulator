@@ -7,6 +7,7 @@ export interface Creature {
   hitPoints:number;
   maxHitPoints:number;
   attackSpeed:number;
-  
+  level:number;
   experienceIfKilled?:number;
+  
 }
