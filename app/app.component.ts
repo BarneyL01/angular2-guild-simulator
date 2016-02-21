@@ -12,7 +12,7 @@ import { DuelComponent } from './duel.component';
         <h1>{{title}}</h1>
         <nav>
             <a [routerLink]="['Dashboard']">Dashboard</a>
-            <a [routerLink]="['Heroes']">Heroes</a>
+            <a [routerLink]="['Heroes']">The Guild</a>
             <a [routerLink]="['Duel']">Duel</a>
         </nav>
         <router-outlet></router-outlet>

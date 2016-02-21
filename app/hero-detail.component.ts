@@ -13,6 +13,7 @@ import { HeroService } from './hero.service';
 
 export class HeroDetailComponent {
     hero: Hero;
+    showBack:boolean=true;
     
     constructor(
         private _heroService: HeroService,
@@ -29,5 +30,11 @@ export class HeroDetailComponent {
         window.history.back();
     }
 
-
+    setHero(hero:Hero){
+        this.hero = hero;
+    }
+    
+    setShowBack(show:boolean){
+        this.showBack = show;
+    }
 }

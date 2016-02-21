@@ -2,3 +2,7 @@
     background-color: #CFD8DC !important;
     color: white;
 }
+
+.heroColumn{
+    min-height: 400px;
+}
