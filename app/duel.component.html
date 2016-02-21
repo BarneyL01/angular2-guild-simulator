@@ -9,9 +9,10 @@
             <option *ngFor="#hero of heroes" [value]="hero.id">{{hero.name}}</option>
         </select>
         <div>Duel between:
-             <span *ngIf="selectedHero1"> {{selectedHero1.name}}</span> 
+             <span *ngIf="selectedHero1" class="hero1name" > 
+                 {{selectedHero1.name}}</span> 
              <span *ngIf="selectedHero1 && selectedHero2">and </span>
-            <span *ngIf="selectedHero2">{{selectedHero2.name}}</span>
+            <span *ngIf="selectedHero2" class="hero2name">{{selectedHero2.name}}</span>
         </div>
         <div>
         <button (click)="startFight()">Start Fight</button>
@@ -28,22 +29,30 @@
         <div *ngIf="fightStarted">Fight Started!
             <div *ngFor="#fightCommentary of fightCommentarys"  >
                 <div *ngIf="fightCommentary.hitConnected">            
-                    {{fightCommentary.attacker}} hit 
-                    {{fightCommentary.defender}} for 
+                    <span [ngClass]="{hero1name:fightCommentary.attacker.id == selectedHero1.id, 
+                                      hero2name:fightCommentary.attacker.id == selectedHero2.id}">
+                        {{fightCommentary.attacker.name}}</span> hit 
+                    <span [ngClass]="{hero1name:fightCommentary.defender.id == selectedHero1.id, 
+                                      hero2name:fightCommentary.defender.id == selectedHero2.id}">
+                        {{fightCommentary.defender.name}}</span> for 
                     {{fightCommentary.damage}} damage,
                     {{fightCommentary.remainingHp}} remaining HPs.
                     
                 </div>
                 <div *ngIf="!fightCommentary.hitConnected">            
-                    {{fightCommentary.attacker}} missed 
-                    {{fightCommentary.defender}}.
+                    <span [ngClass]="{hero1name:fightCommentary.attacker.id == selectedHero1.id, 
+                                      hero2name:fightCommentary.attacker.id == selectedHero2.id}">
+                        {{fightCommentary.attacker.name}}</span> missed 
+                    <span [ngClass]="{hero1name:fightCommentary.defender.id == selectedHero1.id, 
+                                      hero2name:fightCommentary.defender.id == selectedHero2.id}">
+                        {{fightCommentary.defender.name}}</span>.
                     
                 </div>
             </div>
-            <div *ngIf="selectedHero1IsDead" >
+            <div *ngIf="selectedHero1IsDead" class="hero1name">
                 {{selectedHero1.name}} is Dead.
             </div>
-            <div *ngIf="selectedHero2IsDead" >
+            <div *ngIf="selectedHero2IsDead" class="hero2name">
                 {{selectedHero2.name}} is Dead.
             </div>
             <br>
@@ -52,7 +61,19 @@
                     Duel ended in a tie.     
                 </div>
                 <div *ngIf="!fightResult.resultTie" >
-                    {{fightResult.winner.name}} defeated {{fightResult.loser.name}}. {{fightResult.winner.name}} gained {{fightResult.experienceGained}} xp.
+                    <span [ngClass]="{hero1name:fightResult.winner.id == selectedHero1.id, 
+                                      hero2name:fightResult.winner.id == selectedHero2.id}">
+                                      {{fightResult.winner.name}} </span>
+                                      defeated 
+                    <span [ngClass]="{hero1name:fightResult.loser.id == selectedHero1.id, 
+                                      hero2name:fightResult.loser.id == selectedHero2.id}">
+                                      {{fightResult.loser.name}}.
+                                      </span>
+                   <span [ngClass]="{hero1name:fightResult.winner.id == selectedHero1.id, 
+                                      hero2name:fightResult.winner.id == selectedHero2.id}">
+                                       {{fightResult.winner.name}} 
+                                       </span>
+                                       gained {{fightResult.experienceGained}} xp.
                 </div>
             </div>
         </div>
@@ -77,4 +98,5 @@
     <div class="leftColumn">
         Reset HP: <button (click)="resetHp()">Reset</button>
     </div>
+    
 </div>

@@ -1,6 +1,8 @@
+import { Creature } from './creature';
+
 export interface Hit {
-  attacker:string;
-  defender:string;
+  attacker:Creature;
+  defender:Creature;
   hitConnected:boolean;
   damage?:number;
   remainingHp?:number;

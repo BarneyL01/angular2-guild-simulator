@@ -92,14 +92,14 @@ export class FightEngine {
             // update hp
             defender.hitPoints -= damage;
             
-            return {attacker:attacker.name, 
-                    defender: defender.name, 
+            return {attacker:attacker, 
+                    defender: defender, 
                     hitConnected:true, 
                     damage:damage, 
                     remainingHp:defender.hitPoints };
         }else{
-            return {attacker:attacker.name, 
-                defender: defender.name, 
+            return {attacker:attacker, 
+                defender: defender, 
                 hitConnected:false};
         }
     }

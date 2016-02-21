@@ -1,5 +1,6 @@
 import { Component, OnInit } from 'angular2/core';
 import { Router } from 'angular2/router';
+import {NgClass} from 'angular2/common';
 
 import { Hero } from './hero';
 import { HeroService } from './hero.service';
@@ -12,7 +13,7 @@ import CreatureUtils from './creature-utils'
 @Component({
   selector: 'my-duel',
   templateUrl : 'app/duel.component.html',
-  directives: [],
+  directives: [NgClass],
   styleUrls: ['app/duel.component.css']
 })
 
@@ -32,6 +33,8 @@ export class DuelComponent implements OnInit {
     
     selectedHero1:Hero;
     selectedHero2:Hero;
+    
+    isHero1:boolean = true;
     
     fightEngine:FightEngine;
     
@@ -55,17 +58,6 @@ export class DuelComponent implements OnInit {
         this._router.navigate(link);
     }*/
     
-    addHit(hit:Hit){
-        this.fightCommentarys.push(hit);
-    }
-    
-    hitStub():Hit{
-        return {attacker:'John', 
-                defender:'Bob', 
-                hitConnected:true, 
-                damage:2, 
-                remainingHp:5 };
-    }
     
     /*
         Need to get by id because doesn't bind by object.
@@ -132,4 +124,8 @@ export class DuelComponent implements OnInit {
         //console.log('resethp not implemented');
         HeroUtils.resetAllHp(this.heroes);
     }
+    
+/*    isHero1(hero1:Hero, hero2:Hero):boolean{
+        return CreatureUtils.checkSame(hero1, hero2);
+    }*/
 }
