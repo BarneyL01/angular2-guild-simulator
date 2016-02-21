@@ -1,9 +1,11 @@
-<h2>My Heroes</h2>
+<h2>The Guild's Heroes</h2>
     <ul class="heroes">
     <li *ngFor="#hero of heroes"
         [class.selected]="hero === selectedHero"
         (click)="onSelect(hero)">
-        <span class="badge">{{hero.id}}</span> {{hero.name}}
+        <span class="badge">{{hero.id}}</span> 
+            <span class="heroName">{{hero.name}}</span> 
+            <span class="status">HP: {{hero.hitPoints}}/{{hero.maxHitPoints}}</span> 
     </li>
 
 </ul>

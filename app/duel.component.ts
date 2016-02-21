@@ -94,13 +94,23 @@ export class DuelComponent implements OnInit {
             
             this.fightEngine = new FightEngine(this.selectedHero1, this.selectedHero2, this.fightCommentarys);
             // this.fightCommentarys = this.fightEngine.fight(); 
-            this.fightResult = this.fightEngine.fight();
             
-            this.selectedHero1IsDead = CreatureUtils.isDead(this.selectedHero1);
-            this.selectedHero2IsDead = CreatureUtils.isDead(this.selectedHero2);
+            this.resolveFightResults();
         }
         
         
+    }
+    
+    resolveFightResults(){
+        this.fightResult = this.fightEngine.fight();
+            
+        this.selectedHero1IsDead = CreatureUtils.isDead(this.selectedHero1);
+        this.selectedHero2IsDead = CreatureUtils.isDead(this.selectedHero2);
+        
+        if(!this.fightResult.resultTie){
+            // Update wins/losses
+            
+        }
     }
     
     
