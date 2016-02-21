@@ -13,6 +13,7 @@ import { FightEngine } from './fight-engine';
 import {FightResult} from './fight-result';
 import HeroUtils from './hero-utils';
 import CreatureUtils from './creature-utils'
+import DungeonUtils from './dungeon-utils'
 
 @Component({
   selector: 'my-dungeon-component',
@@ -24,12 +25,15 @@ import CreatureUtils from './creature-utils'
 export class DungeonComponent implements OnInit {
     heroes: Hero[] = [];
     dungeons: Dungeon[] = [];
+    activeMonster:Creature;
     monsters: Creature[] = [];
     fightCommentarys: Hit[] = [];
     fightResult: FightResult;
     selectedHero:Hero;
+    selectedDungeon:Dungeon;
     
     heroUnselected:boolean = false;
+    dungeonUnselected:boolean = false;
     enterDungeonError:boolean = false;
     selectedHeroIsDead:boolean = false;
     
@@ -59,14 +63,20 @@ export class DungeonComponent implements OnInit {
         this.selectedHero = HeroUtils.getById(this.heroes,id);
     }
     
+    setDungeon(id:number){
+        this.selectedDungeon = DungeonUtils.getById(this.dungeons,id);
+    }
+    
     startDungeon():void{
         this.heroUnselected = (this.selectedHero == null);
         this.selectedHeroIsDead = CreatureUtils.isDead(this.selectedHero);
+        this.dungeonUnselected = (this.selectedDungeon == null);
         
-        this.enterDungeonError = (this.heroUnselected || this.selectedHeroIsDead);
+        this.enterDungeonError = (this.heroUnselected || this.selectedHeroIsDead || this.dungeonUnselected);
         
         if(!this.enterDungeonError){
             this.dungeonStarted = true;
+            this.activeMonster = DungeonUtils.getMonster(this.selectedDungeon, this.monsters);
         }
     }
 }

@@ -5,10 +5,10 @@
         <select #selectHero [disabled]="dungeonStarted" [ngModel]="heroes" (change)="setHero($event.target.value)">
             <option *ngFor="#hero of heroes" [value]="hero.id">{{hero.name}}</option>
         </select>
-<!--    TODO: implement dungeon selector    
-        <select #select1 [ngModel]="heroes" (change)="setHero($event.target.value)">
-            <option *ngFor="#hero of heroes" [value]="hero.id">{{hero.name}}</option>
-        </select>-->
+
+        <select #selectDungeon [ngModel]="dungeons" (change)="setDungeon($event.target.value)">
+            <option *ngFor="#dungeon of dungeons" [value]="dungeon.id">{{dungeon.name}}</option>
+        </select>
         <div>Send 
              <span *ngIf="selectedHero" > 
                  {{selectedHero.name}}</span>  
@@ -22,10 +22,13 @@
         <div *ngIf="enterDungeonError">Problem with heading into the dungeon:
             <div *ngIf="heroUnselected">Hero not selected.</div>
             <div *ngIf="selectedHeroIsDead">{{selectedHero.name}} is dead.</div>
+            <div *ngIf="dungeonUnselected">Dungeon not selected.</div>
         </div>
         
-        
-        
+        <div *ngIf="activeMonster">
+            <div>Encountered: {{activeMonster.name}} (level {{activeMonster.level}}) </div>
+            <div><label>id: </label>{{activeMonster.id}}</div>
+        </div>
         <!--Fight Result text:-->
         <div *ngIf="fightStarted">Fight Started!
             <div *ngFor="#fightCommentary of fightCommentarys"  >

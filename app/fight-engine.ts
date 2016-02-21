@@ -2,6 +2,7 @@ import { Creature } from './creature';
 // import { HeroService } from './hero.service';
 import { Hit } from './hit';
 import CreatureUtils from './creature-utils';
+import GeneralUtils from './general-utils';
 import {FightResult} from './fight-result';
 
 export class FightEngine {
@@ -88,7 +89,7 @@ export class FightEngine {
     creatureAttack(attacker:Creature, defender:Creature):Hit{
         var damage:number;
         if(this.hitSucceed(attacker, defender)){
-            damage = this.rollDice(this.strengthDice, attacker.strength);
+            damage = GeneralUtils.rollDice(this.strengthDice, attacker.strength);
             // update hp
             defender.hitPoints -= damage;
             
@@ -109,14 +110,12 @@ export class FightEngine {
     }
     
     hitSucceed(attacker:Creature, defender:Creature):boolean{
-        var attackRoll:number = this.rollDice(this.accuracyDice, attacker.dexterity);
-        var defendRoll:number = this.rollDice(this.accuracyDice, defender.dexterity);
+        var attackRoll:number = GeneralUtils.rollDice(this.accuracyDice, attacker.dexterity);
+        var defendRoll:number = GeneralUtils.rollDice(this.accuracyDice, defender.dexterity);
         // console.log('hitSucceed: ', attackRoll, ' against ', defendRoll);
         return (attackRoll > defendRoll);
     }
     
-    rollDice(diceSides:number, modifier:number):number{
-        return Math.floor((Math.random() * diceSides) + modifier);
-    }
+    
         
 }
