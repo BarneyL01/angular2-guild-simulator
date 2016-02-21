@@ -12,13 +12,13 @@ import CreatureUtils from './creature-utils'
 @Component({
   selector: 'my-duel',
   templateUrl : 'app/duel.component.html',
-  directives: [] 
-  //,
-  //styleUrls: ['app/fight.component.css']
+  directives: [],
+  styleUrls: ['app/duel.component.css']
 })
 
 export class DuelComponent implements OnInit {
     heroes: Hero[] = [];
+    heroesByrank: Hero[] = [];
     fightCommentarys: Hit[] = [];
     fightResult: FightResult;
     
@@ -41,7 +41,12 @@ export class DuelComponent implements OnInit {
     }
 
     ngOnInit() {
-         this._heroService.getHeroes().then(heroes => this.heroes = heroes);
+         this._heroService.getHeroes()
+            .then(heroes => {
+                this.heroes = heroes;
+                this.heroesByrank = HeroUtils.heroListByRank(this.heroes);
+            })
+                
          
     }
     
@@ -68,11 +73,15 @@ export class DuelComponent implements OnInit {
     setHero1(id:number){
         // console.log('heroId', id);
         this.selectedHero1 = HeroUtils.getById(this.heroes,id);
+        this.fightStarted = false;
+        this.duelError=false;
         //   console.log('selectedHero1', this.selectedHero1.name);
     }
     
     setHero2(id:number){
         this.selectedHero2 = HeroUtils.getById(this.heroes,id);
+        this.fightStarted = false;
+        this.duelError=false;
     }
     
     startFight(){
@@ -91,6 +100,8 @@ export class DuelComponent implements OnInit {
         }else{
             this.duelError=false;
             this.fightStarted = true;
+            // clear existing fight commentary: 
+            this.fightCommentarys = [];
             
             this.fightEngine = new FightEngine(this.selectedHero1, this.selectedHero2, this.fightCommentarys);
             // this.fightCommentarys = this.fightEngine.fight(); 
@@ -107,10 +118,19 @@ export class DuelComponent implements OnInit {
         this.selectedHero1IsDead = CreatureUtils.isDead(this.selectedHero1);
         this.selectedHero2IsDead = CreatureUtils.isDead(this.selectedHero2);
         
+        console.log('type', typeof this.fightResult.winner)
         if(!this.fightResult.resultTie){
             // Update wins/losses
-            
+            HeroUtils.updateDuel(this.heroes, this.fightResult.winner.id, true);
+            HeroUtils.updateDuel(this.heroes, this.fightResult.loser.id, false);
+        }else{
+            // In a tie, both lose.
+            HeroUtils.updateDuel(this.heroes, this.fightResult.winner.id, false);
+            HeroUtils.updateDuel(this.heroes, this.fightResult.loser.id, false);
         }
+        
+        HeroUtils.updateRank(this.heroes);
+        this.heroesByrank = HeroUtils.heroListByRank(this.heroes);
     }
     
     

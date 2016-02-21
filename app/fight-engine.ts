@@ -49,8 +49,8 @@ export class FightEngine {
         }
         
         this.fightResult = {
-                winner: '',
-                loser: '',
+                winner: null,
+                loser: null,
                 experienceGained:0, 
                 resultTie: false
         };
@@ -60,20 +60,20 @@ export class FightEngine {
                 CreatureUtils.isDead(this.creature2))
         {
             // arbitrarily still set winner & loser
-            this.fightResult.winner = this.creature1.name;
-            this.fightResult.loser = this.creature2.name;
+            this.fightResult.winner = this.creature1;
+            this.fightResult.loser = this.creature2;
             
             this.fightResult.resultTie = true;
         }else{
                 // creature 2 won.
             if(CreatureUtils.isDead(this.creature1)){
-                this.fightResult.winner = this.creature2.name;
-                this.fightResult.loser = this.creature1.name;
+                this.fightResult.winner = this.creature2;
+                this.fightResult.loser = this.creature1;
                 this.fightResult.experienceGained = CreatureUtils.getExperienceIfKilled(this.creature1);
             }else{
                 // creature 1 won.
-                this.fightResult.winner = this.creature1.name;
-                this.fightResult.loser = this.creature2.name;
+                this.fightResult.winner = this.creature1;
+                this.fightResult.loser = this.creature2;
                 this.fightResult.experienceGained = CreatureUtils.getExperienceIfKilled(this.creature2);
             }
         }

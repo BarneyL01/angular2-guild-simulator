@@ -24,13 +24,13 @@
     <div>
         <label>Experience Points: </label>{{hero.experience}}</div>
     <div>
-    <div *ngIf="hero.duelWins">
+    <div *ngIf="hero.duelWins != null">
         <label>Wins (duel): </label>{{hero.duelWins}}</div>
     <div>        
-    <div *ngIf="hero.duelLosses">
+    <div *ngIf="hero.duelLosses != null">
         <label>Losses (duel): </label>{{hero.duelLosses}}</div>
     <div>        
-    <div *ngIf="hero.rank">
+    <div *ngIf="hero.rank  != null">
         <label>rank: </label>{{hero.rank}}</div>
     <div>  
                 

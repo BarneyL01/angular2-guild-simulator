@@ -1,6 +1,8 @@
+import { Creature } from './creature';
+
 export interface FightResult{
-    winner:string;
-    loser:string;
+    winner:Creature;
+    loser:Creature;
     experienceGained:number;
     resultTie:boolean;
 }

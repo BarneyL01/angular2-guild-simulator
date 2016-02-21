@@ -1,5 +1,97 @@
 h2 { color: #444; font-weight: lighter; }
-body { margin: 2em; }
+body { margin: 2em;
+    /*background-color:black; */
+}
 body, input[text], button { color: #888; font-family: Cambria, Georgia; }
 button { padding: 0.2em; font-size: 14px}
 * { font-family: Arial; }
+
+
+.heroes {
+    margin: 0 0 2em 0;
+    list-style-type: none;
+    padding: 0;
+    width: 20em;
+}
+.heroes li {
+    cursor: pointer;
+    position: relative;
+    left: 0;
+    background-color: #EEE;
+    margin: .5em;
+    padding: .3em 0em;
+    height: 3em;
+    border-radius: 4px;
+}
+.heroes .badge, .status {
+    height: 3em;
+    line-height: 1em;
+    padding: 0.8em 0.7em 0.65em 0.7em;
+    font-size: small;
+    top: -5px;
+}
+
+.heroes li.selected:hover {
+    color: white;
+}
+.heroes li:hover {
+    color: #607D8B;
+    background-color: #EEE;
+    left: .1em;
+}
+.heroes .text {
+    position: relative;
+    top: -3px;
+}
+
+.heroes .badge {
+    
+    color: white;
+    background-color: #607D8B;
+    position: relative;
+    float: left;
+    left: 0px;
+    margin-right: .8em;
+    border-radius: 4px 0px 0px 4px;
+}
+
+.heroes .heroName{
+    display: inline-block;
+    width: 8em;
+    font-weight: bold;
+}
+
+.heroes .status {
+    float: right;
+    color: darkslategrey;    
+    background-color: #99CCFF;
+    position: relative;
+    width: 6em;
+    border-radius: 4px 4px 4px 4px;
+}
+/* http://codepen.io/johnstonian/pen/guhid columns: */
+.columnsContainer{ 
+    position: relative; 
+    margin: .5em; 
+}
+
+.leftColumn, .rightColumn{  
+    border: 1px solid  #ccc; 
+    padding: .5em; 
+}
+
+.leftColumn { 
+    margin-bottom: .5em;
+}
+
+@media screen and (min-width: 47.5em ) {
+  .leftColumn { margin-right: 30em; }
+  
+  .rightColumn { 
+        position: absolute; 
+        top: 0; 
+        right: 0; 
+        width: 25em; 
+    }   
+}
+

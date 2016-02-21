@@ -1,56 +1,74 @@
 <h3>Duel Result</h3>
 
+<div class="columnsContainer">
+    <div class="leftColumn">
+        <select #select1 [ngModel]="heroes" (change)="setHero1($event.target.value)">
+            <option *ngFor="#hero of heroes" [value]="hero.id">{{hero.name}}</option>
+        </select>
+        <select #select2 [ngModel]="heroes" (change)="setHero2($event.target.value)">
+            <option *ngFor="#hero of heroes" [value]="hero.id">{{hero.name}}</option>
+        </select>
 
-<select #select1 [ngModel]="heroes" (change)="setHero1($event.target.value)">
-    <option *ngFor="#hero of heroes" [value]="hero.id">{{hero.name}}</option>
-</select>
-<select #select2 [ngModel]="heroes" (change)="setHero2($event.target.value)">
-    <option *ngFor="#hero of heroes" [value]="hero.id">{{hero.name}}</option>
-</select>
+        <div *ngIf="selectedHero1">Hero 1: {{selectedHero1.name}}</div>
+        <div *ngIf="selectedHero2">Hero 2: {{selectedHero2.name}}</div>
 
-<div *ngIf="selectedHero1">Hero 1: {{selectedHero1.name}}</div>
-<div *ngIf="selectedHero2">Hero 2: {{selectedHero2.name}}</div>
-
-<div>
-<button (click)="startFight()">Start Fight</button>
-</div>
-<br>
-<!--Fight Result text:-->
-<div *ngIf="duelError">Problem with duel:
-    <div *ngIf="heroUnselected">Problem, one or both heroes not selected.</div>
-    <div *ngIf="sameHeroSelected">Problem, duel of the same hero ?!</div>
-    <div *ngIf="selectedHero1IsDead">Problem, {{selectedHero1.name}} is dead.</div>
-    <div *ngIf="selectedHero2IsDead">Problem, {{selectedHero2.name}} is dead.</div>
-</div>
-
-<div *ngIf="fightStarted">Fight Started!
-    <div *ngFor="#fightCommentary of fightCommentarys"  >
-        <div *ngIf="fightCommentary.hitConnected">            
-            {{fightCommentary.attacker}} hit 
-            {{fightCommentary.defender}} for 
-            {{fightCommentary.damage}} damage,
-            {{fightCommentary.remainingHp}} remaining HPs.
-            
+        <div>
+        <button (click)="startFight()">Start Fight</button>
         </div>
-        <div *ngIf="!fightCommentary.hitConnected">            
-            {{fightCommentary.attacker}} missed 
-            {{fightCommentary.defender}}.
-            
+        <br>
+        <!--Fight Result text:-->
+        <div *ngIf="duelError">Problem with duel:
+            <div *ngIf="heroUnselected">Problem, one or both heroes not selected.</div>
+            <div *ngIf="sameHeroSelected">Problem, duel of the same hero ?!</div>
+            <div *ngIf="selectedHero1IsDead">Problem, {{selectedHero1.name}} is dead.</div>
+            <div *ngIf="selectedHero2IsDead">Problem, {{selectedHero2.name}} is dead.</div>
+        </div>
+
+        <div *ngIf="fightStarted">Fight Started!
+            <div *ngFor="#fightCommentary of fightCommentarys"  >
+                <div *ngIf="fightCommentary.hitConnected">            
+                    {{fightCommentary.attacker}} hit 
+                    {{fightCommentary.defender}} for 
+                    {{fightCommentary.damage}} damage,
+                    {{fightCommentary.remainingHp}} remaining HPs.
+                    
+                </div>
+                <div *ngIf="!fightCommentary.hitConnected">            
+                    {{fightCommentary.attacker}} missed 
+                    {{fightCommentary.defender}}.
+                    
+                </div>
+            </div>
+            <div *ngIf="selectedHero1IsDead" >
+                {{selectedHero1.name}} is Dead.
+            </div>
+            <div *ngIf="selectedHero2IsDead" >
+                {{selectedHero2.name}} is Dead.
+            </div>
+            <br>
+            <div *ngIf="fightResult"> Duel Ended:
+                <div *ngIf="fightResult.resultTie" >
+                    Duel ended in a tie.     
+                </div>
+                <div *ngIf="!fightResult.resultTie" >
+                    {{fightResult.winner.name}} defeated {{fightResult.loser.name}}. {{fightResult.winner.name}} gained {{fightResult.experienceGained}} xp.
+                </div>
+            </div>
         </div>
     </div>
-    <div *ngIf="selectedHero1IsDead" >
-        {{selectedHero1.name}} is Dead.
+
+    <div class="rightcolumn rankings">
+    <ul class="heroes">
+        <li *ngFor="#hero of heroesByrank">
+            <!--*ngIf="hero.rank"-->
+            <span  class="badge">Rank: {{hero.rank}}</span> 
+                <span class="heroName">{{hero.name}} <br> <span class="hitpoints">HP: {{hero.hitPoints}}/{{hero.maxHitPoints}}</span> </span> 
+                <!--*ngIf="hero.duelWins != null && hero.duelLosses != null" -->
+                <span class="status">
+                    Wins: {{hero.duelWins}} Losses:{{hero.duelLosses}}</span> 
+        </li>
+
+    </ul>
     </div>
-    <div *ngIf="selectedHero2IsDead" >
-        {{selectedHero2.name}} is Dead.
-    </div>
-    <br>
-    <div *ngIf="fightResult"> Duel Ended:
-        <div *ngIf="fightResult.resultTie" >
-            Duel ended in a tie.     
-        </div>
-        <div *ngIf="!fightResult.resultTie" >
-            {{fightResult.winner}} defeated {{fightResult.loser}}. {{fightResult.winner}} gained {{fightResult.experienceGained}} xp.
-        </div>
-    </div>
+
 </div>
