@@ -68,18 +68,14 @@ export class DuelComponent implements OnInit {
     }
     
     /*
-        Need this function because selector doesn't seem to bind properly.
+        Need to get by id because doesn't bind by object.
     */
-    setHero1(id:number){
-        // console.log('heroId', id);
-        this.selectedHero1 = HeroUtils.getById(this.heroes,id);
-        this.fightStarted = false;
-        this.duelError=false;
-        //   console.log('selectedHero1', this.selectedHero1.name);
-    }
-    
-    setHero2(id:number){
-        this.selectedHero2 = HeroUtils.getById(this.heroes,id);
+    setHero(whichHero:number, id:number){
+        if (whichHero == 1) {
+            this.selectedHero1 = HeroUtils.getById(this.heroes,id);
+        } else {
+            this.selectedHero2 = HeroUtils.getById(this.heroes,id);
+        }
         this.fightStarted = false;
         this.duelError=false;
     }
@@ -92,46 +88,48 @@ export class DuelComponent implements OnInit {
         
         
         // check for selection, then start fight.
-        if(this.heroUnselected || this.sameHeroSelected ||
-           this.selectedHero1IsDead ||  this.selectedHero2IsDead)
-        {
-            this.duelError=true;
+        if (this.heroUnselected || this.sameHeroSelected ||
+            this.selectedHero1IsDead || this.selectedHero2IsDead) {
+            this.duelError = true;
             this.fightStarted = false;
-        }else{
-            this.duelError=false;
+        } else {
+            this.duelError = false;
             this.fightStarted = true;
             // clear existing fight commentary: 
             this.fightCommentarys = [];
-            
+
             this.fightEngine = new FightEngine(this.selectedHero1, this.selectedHero2, this.fightCommentarys);
             // this.fightCommentarys = this.fightEngine.fight(); 
             
             this.resolveFightResults();
         }
-        
-        
+
+
     }
-    
-    resolveFightResults(){
+
+    resolveFightResults() {
         this.fightResult = this.fightEngine.fight();
-            
+
         this.selectedHero1IsDead = CreatureUtils.isDead(this.selectedHero1);
         this.selectedHero2IsDead = CreatureUtils.isDead(this.selectedHero2);
-        
-        console.log('type', typeof this.fightResult.winner)
-        if(!this.fightResult.resultTie){
+
+        // console.log('type', typeof this.fightResult.winner)
+        if (!this.fightResult.resultTie) {
             // Update wins/losses
             HeroUtils.updateDuel(this.heroes, this.fightResult.winner.id, true);
             HeroUtils.updateDuel(this.heroes, this.fightResult.loser.id, false);
-        }else{
+        } else {
             // In a tie, both lose.
             HeroUtils.updateDuel(this.heroes, this.fightResult.winner.id, false);
             HeroUtils.updateDuel(this.heroes, this.fightResult.loser.id, false);
         }
-        
+
         HeroUtils.updateRank(this.heroes);
         this.heroesByrank = HeroUtils.heroListByRank(this.heroes);
     }
-    
-    
+
+    resetHp(){
+        //console.log('resethp not implemented');
+        HeroUtils.resetAllHp(this.heroes);
+    }
 }

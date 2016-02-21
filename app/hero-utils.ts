@@ -89,6 +89,13 @@ var HeroUtils = {
             }
             
             return 0;
+    },
+    
+    resetAllHp: function(heroes:Hero[]):void{
+        for(let hero of heroes){
+            hero.hitPoints = hero.maxHitPoints;
+        }
+        return;
     }
     
     

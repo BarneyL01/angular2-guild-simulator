@@ -2,16 +2,17 @@
 
 <div class="columnsContainer">
     <div class="leftColumn">
-        <select #select1 [ngModel]="heroes" (change)="setHero1($event.target.value)">
+        <select #select1 [ngModel]="heroes" (change)="setHero(1, $event.target.value)">
             <option *ngFor="#hero of heroes" [value]="hero.id">{{hero.name}}</option>
         </select>
-        <select #select2 [ngModel]="heroes" (change)="setHero2($event.target.value)">
+        <select #select2 [ngModel]="heroes" (change)="setHero(2, $event.target.value)">
             <option *ngFor="#hero of heroes" [value]="hero.id">{{hero.name}}</option>
         </select>
-
-        <div *ngIf="selectedHero1">Hero 1: {{selectedHero1.name}}</div>
-        <div *ngIf="selectedHero2">Hero 2: {{selectedHero2.name}}</div>
-
+        <div>Duel between:
+             <span *ngIf="selectedHero1"> {{selectedHero1.name}}</span> 
+             <span *ngIf="selectedHero1 && selectedHero2">and </span>
+            <span *ngIf="selectedHero2">{{selectedHero2.name}}</span>
+        </div>
         <div>
         <button (click)="startFight()">Start Fight</button>
         </div>
@@ -71,4 +72,9 @@
     </ul>
     </div>
 
+</div>
+<div class="columnsContainer">
+    <div class="leftColumn">
+        Reset HP: <button (click)="resetHp()">Reset</button>
+    </div>
 </div>
