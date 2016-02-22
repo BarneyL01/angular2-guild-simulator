@@ -1,0 +1,53 @@
+<!--Fight Commentary text:-->
+<div *ngIf="!fightError">
+    {{fightType | uppercase}}  Started!
+    <div *ngFor="#fightCommentary of fightCommentarys"  >
+        <div *ngIf="fightCommentary.hitConnected">            
+            <span [ngClass]="{creature1name:fightCommentary.attacker.id == creature1.id, 
+                                creature2name:fightCommentary.attacker.id == creature2.id}">
+                {{fightCommentary.attacker.name}}</span> hit 
+            <span [ngClass]="{creature1name:fightCommentary.defender.id == creature1.id, 
+                                creature2name:fightCommentary.defender.id == creature2.id}">
+                {{fightCommentary.defender.name}}</span> for 
+            {{fightCommentary.damage}} damage,
+            {{fightCommentary.remainingHp}} remaining HPs.
+            
+        </div>
+        <div *ngIf="!fightCommentary.hitConnected">            
+            <span [ngClass]="{creature1name:fightCommentary.attacker.id == creature1.id, 
+                                creature2name:fightCommentary.attacker.id == creature2.id}">
+                {{fightCommentary.attacker.name}}</span> missed 
+            <span [ngClass]="{creature1name:fightCommentary.defender.id == creature1.id, 
+                                creature2name:fightCommentary.defender.id == creature2.id}">
+                {{fightCommentary.defender.name}}</span>.
+            
+        </div>
+    </div>
+    <div *ngIf="creature1IsDead" class="creature1name">
+        {{creature1.name}} is Dead.
+    </div>
+    <div *ngIf="creature2IsDead" class="creature2name">
+        {{creature2.name}} is Dead.
+    </div>
+    <br>
+    <div *ngIf="fightResult"> {{fightType | uppercase}}  Ended:
+        <div *ngIf="fightResult.resultTie" >
+            {{fightType | uppercase}} ended in a tie.     
+        </div>
+        <div *ngIf="!fightResult.resultTie" >
+            <span [ngClass]="{creature1name:fightResult.winner.id == creature1.id, 
+                                creature2name:fightResult.winner.id == creature2.id}">
+                                {{fightResult.winner.name}} </span>
+                                defeated 
+            <span [ngClass]="{creature1name:fightResult.loser.id == creature1.id, 
+                                creature2name:fightResult.loser.id == creature2.id}">
+                                {{fightResult.loser.name}}.
+                                </span>
+            <span [ngClass]="{creature1name:fightResult.winner.id == creature1.id, 
+                                creature2name:fightResult.winner.id == creature2.id}">
+                                {{fightResult.winner.name}} 
+                                </span>
+                                gained {{fightResult.experienceGained}} xp.
+        </div>
+    </div>
+</div>

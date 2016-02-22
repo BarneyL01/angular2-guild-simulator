@@ -1,19 +1,20 @@
-import { Component, OnInit } from 'angular2/core';
+import { Component, OnInit, ViewChild } from 'angular2/core';
 import { Router } from 'angular2/router';
-import {NgClass} from 'angular2/common';
+import { NgClass } from 'angular2/common';
 
 import { Hero } from './hero';
 import { HeroService } from './hero.service';
 import { Hit } from './hit';
 import { FightEngine } from './fight-engine';
-import {FightResult} from './fight-result';
+import { FightComponent } from './fight.component';
+import { FightResult } from './fight-result';
 import HeroUtils from './hero-utils';
 import CreatureUtils from './creature-utils'
 
 @Component({
   selector: 'my-duel',
   templateUrl : 'app/duel.component.html',
-  directives: [NgClass],
+  directives: [NgClass,FightComponent],
   styleUrls: ['app/duel.component.css']
 })
 
@@ -37,6 +38,8 @@ export class DuelComponent implements OnInit {
     isHero1:boolean = true;
     
     fightEngine:FightEngine;
+    
+    @ViewChild(FightComponent) fightComponent:FightComponent;
     
     constructor(
         private _router: Router,
@@ -87,11 +90,8 @@ export class DuelComponent implements OnInit {
         } else {
             this.duelError = false;
             this.fightStarted = true;
-            // clear existing fight commentary: 
-            this.fightCommentarys = [];
-
-            this.fightEngine = new FightEngine(this.selectedHero1, this.selectedHero2, this.fightCommentarys);
-            // this.fightCommentarys = this.fightEngine.fight(); 
+            
+            this.fightResult = this.fightComponent.startFight(this.selectedHero1, this.selectedHero2);
             
             this.resolveFightResults();
         }
@@ -100,7 +100,7 @@ export class DuelComponent implements OnInit {
     }
 
     resolveFightResults() {
-        this.fightResult = this.fightEngine.fight();
+        
 
         this.selectedHero1IsDead = CreatureUtils.isDead(this.selectedHero1);
         this.selectedHero2IsDead = CreatureUtils.isDead(this.selectedHero2);
@@ -124,8 +124,4 @@ export class DuelComponent implements OnInit {
         //console.log('resethp not implemented');
         HeroUtils.resetAllHp(this.heroes);
     }
-    
-/*    isHero1(hero1:Hero, hero2:Hero):boolean{
-        return CreatureUtils.checkSame(hero1, hero2);
-    }*/
 }
