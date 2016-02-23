@@ -90,19 +90,19 @@ export class DungeonComponent implements OnInit {
             var dungeonLength = DungeonUtils.generateDungeonLength(this.selectedDungeon);
             console.log('dungeonLength: ', dungeonLength);
             
-            this.fightMonster();
+            
             
             // this.activeMonster = DungeonUtils.spawnMonster(this.selectedDungeon, this.monsters);
             
             // this.fightResult = this.fightComponent.startFight(this.selectedHero, this.activeMonster, false);
         
-            // for(var i = 0; i < dungeonLength && HeroUtils.isHeroOk(this.selectedHero); i++)
-            // {
-                
-            //     setTimeout(this.fightMonster(), 1000);
-            // }            
+            for(var i = 0; i < dungeonLength && HeroUtils.isHeroOk(this.selectedHero); i++)
+            {
+                    this.fightMonster();
             
-            this.resolveFightResults();
+            }
+            
+            this.selectedHeroIsDead = CreatureUtils.isDead(this.selectedHero);            
         }
     }
     
@@ -120,14 +120,7 @@ export class DungeonComponent implements OnInit {
         var newMonster:Creature = DungeonUtils.spawnMonster(this.selectedDungeon, this.monsters);
         this.monstersFought.push(newMonster.name);
             
-        this.fightResult = this.fightComponent.startFight(this.selectedHero, newMonster, false);
+        this.fightResult = this.fightComponent.startFight(this.selectedHero, newMonster);
     }
     
-    resolveFightResults() {
-
-        this.selectedHeroIsDead = CreatureUtils.isDead(this.selectedHero);
-        this.activeMonsterIsDead = CreatureUtils.isDead(this.activeMonster);
-
-        // TODO: Implement experience gain -- probably put this in FightEngine
-    }
 }

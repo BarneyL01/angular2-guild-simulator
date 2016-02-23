@@ -20,16 +20,17 @@ import DungeonUtils from './dungeon-utils'
 })
 
 export class FightComponent{
-    fightCommentarys:Hit[] = [];
+    // fightCommentarys:Hit[] = [];
     fightEngine:FightEngine;
-    fightResult:FightResult;
+    fightResults:FightResult[] = [];
     
     creature1:Creature;
     creature2:Creature;
     
-    fightError:boolean = false;
+    fightError:boolean;
+    fightStarted:boolean=false;
     
-    fightType:string = "fight";
+    fightType:string = "Fight";
     
     constructor() {
     }
@@ -38,28 +39,24 @@ export class FightComponent{
         this.fightType = fightType;
     }
     
-    startFight(creature1:Creature, creature2:Creature, resetCommentary:boolean):FightResult{
+    startFight(creature1:Creature, creature2:Creature):FightResult{
         this.creature1 = creature1;
         this.creature2 = creature2;
         
         this.fightError = (this.creature1 == null || this.creature2 == null);
         if(this.fightError) return;
+        this.fightError = (this.creature1.id == null || this.creature2.id == null);
+        if(this.fightError) return;
         
-        // Reset to empty commentary:
-        if(resetCommentary) this.fightCommentarys = [];
-
-        this.fightEngine = new FightEngine(creature1, creature2, this.fightCommentarys);
-                        
-        this.fightResult = this.fightEngine.fight();
-        this.resolveFightResults();
-        return this.fightResult;
+        this.fightStarted = true;
+        this.fightEngine = new FightEngine(creature1, creature2);
+        
+        var newFightResults:FightResult = this.fightEngine.fight()
+        this.fightResults.push(newFightResults);
+        return newFightResults;
     }
     
-    resolveFightResults(){
-        
-    }
-    
-    resetCommentary(){
-        this.fightCommentarys = [];
+    resetFights(){
+        this.fightResults = [];
     }
 }

@@ -24,14 +24,8 @@
             <div *ngIf="selectedHeroIsDead">{{selectedHero.name}} is dead.</div>
             <div *ngIf="dungeonUnselected">Dungeon not selected.</div>
         </div>
-        
-        <div *ngIf="activeMonster">
-            <div>Encountered: {{activeMonster.name}} (level {{activeMonster.level}}) </div>
-            <div><label>id: </label>{{activeMonster.id}}</div>
-        </div>
-        <!--Fight Commentary text:-->
-        <fight-component #fightComponent></fight-component>
-    </div>
+    </div>  
+    
     <div class="rightColumn">
         Fight til 10% (need to change this to selectable rule)
         
@@ -52,5 +46,15 @@
 
         </ul>
     </div>
-
+    
+    <div class="leftColumn">
+        <div *ngIf="dungeonStarted">Dungeon Entered</div>
+        <div *ngIf="activeMonster">
+            <div>Encountered: {{activeMonster.name}} (level {{activeMonster.level}}) </div>
+            <div><label>id: </label>{{activeMonster.id}}</div>
+        </div>
+        <!--Fight Commentary text:-->
+        <fight-component #fightComponent></fight-component>
+        <div *ngIf="selectedHeroIsDead">{{selectedHero.name}} has died.</div>
+    </div>
 </div>

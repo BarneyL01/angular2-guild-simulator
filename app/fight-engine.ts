@@ -10,7 +10,7 @@ import {FightResult} from './fight-result';
 export class FightEngine {
     creature1:Creature;
     creature2:Creature;
-    fightCommentary:Hit[];
+    // fightCommentary:Hit[];
     fightResult:FightResult;
     
     accuracyDice:number = 6;
@@ -22,10 +22,9 @@ export class FightEngine {
     swingTimer:number;
     fightTimerMax:number = 500;
     
-    constructor(creature1:Creature, creature2:Creature, fightCommentary:Hit[]){
+    constructor(creature1:Creature, creature2:Creature){
         this.creature1 = creature1;
         this.creature2 = creature2;
-        this.fightCommentary = fightCommentary;
     }
     
     fight():FightResult{
@@ -33,7 +32,15 @@ export class FightEngine {
         this.creature1NextHit = this.creature1.attackSpeed;
         this.creature2NextHit = this.creature2.attackSpeed;
         console.log('fight running, creature Death:', this.checkCreatureDeath());
-         
+        
+        this.fightResult = {
+                winner: null,
+                loser: null,
+                experienceGained:0, 
+                resultTie: false,
+                fightCommentary: []
+        };
+        
         // Put max on swingTimer so that this doesn't go stupid while I haven't fully tested
         for(this.swingTimer = 0; 
             this.swingTimer < this.fightTimerMax && !this.checkCreatureDeath(); 
@@ -41,22 +48,17 @@ export class FightEngine {
                 
             // console.log(this.swingTimer);
             if(this.creature1NextHit == this.swingTimer){
-                this.fightCommentary.push(this.creatureAttack(this.creature1, this.creature2));
+                this.fightResult.fightCommentary.push(this.creatureAttack(this.creature1, this.creature2));
                 this.creature1NextHit += this.creature1.attackSpeed;
             }
             
             if(this.creature2NextHit == this.swingTimer){
-                this.fightCommentary.push(this.creatureAttack(this.creature2, this.creature1));
+                this.fightResult.fightCommentary.push(this.creatureAttack(this.creature2, this.creature1));
                 this.creature2NextHit += this.creature2.attackSpeed;
             }
         }
         
-        this.fightResult = {
-                winner: null,
-                loser: null,
-                experienceGained:0, 
-                resultTie: false
-        };
+        
         
         // tie fight
         if(CreatureUtils.isDead(this.creature1) && 

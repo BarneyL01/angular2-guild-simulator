@@ -44,15 +44,18 @@ export class DuelComponent implements OnInit {
     constructor(
         private _router: Router,
         private _heroService: HeroService) {
+            
     }
 
     ngOnInit() {
+        
          this._heroService.getHeroes()
             .then(heroes => {
                 this.heroes = heroes;
                 this.heroesByrank = HeroUtils.heroListByRank(this.heroes);
-            })
-                
+            });
+        
+            
          
     }
     
@@ -84,14 +87,18 @@ export class DuelComponent implements OnInit {
         
         // check for selection, then start fight.
         if (this.heroUnselected || this.sameHeroSelected ||
-            this.selectedHero1IsDead || this.selectedHero2IsDead) {
+            this.selectedHero1IsDead || this.selectedHero2IsDead) 
+        {
+                
             this.duelError = true;
             this.fightStarted = false;
+            this.fightComponent.resetFights();
         } else {
             this.duelError = false;
             this.fightStarted = true;
+            this.fightComponent.setFightType("Duel");
             
-            this.fightResult = this.fightComponent.startFight(this.selectedHero1, this.selectedHero2, true);
+            this.fightResult = this.fightComponent.startFight(this.selectedHero1, this.selectedHero2);
             
             this.resolveFightResults();
         }
