@@ -33,20 +33,13 @@ export class FightEngine {
     
     setHeroRules(heroRules:HeroRule[]){
         this.heroRules = heroRules;
-        
-        console.log('fight-engine.setHeroRules()')
-        for(let rule of this.heroRules){
-            console.log('rule:', rule.type, '-', rule.threshold, ':', rule.thresholdTypePercentage);
-        }
-        
-        
     }
     
     fight():FightResult{
         this.swingTimer = 0;
         this.creature1NextHit = this.creature1.attackSpeed;
         this.creature2NextHit = this.creature2.attackSpeed;
-        console.log('fight running, creature Death:', this.checkCreatureDeath());
+        // console.log('fight running, creature Death:', this.checkCreatureDeath());
         
         this.fightResult = {
                 winner: null,
@@ -63,7 +56,7 @@ export class FightEngine {
                 && !this.checkHeroRules(); 
             this.swingTimer++){
                 
-            console.log(this.swingTimer, ': checkHeroRules():', this.checkHeroRules());
+            // console.log(this.swingTimer, ': checkHeroRules():', this.checkHeroRules());
             if(this.creature1NextHit == this.swingTimer){
                 this.fightResult.fightCommentary.push(this.creatureAttack(this.creature1, this.creature2));
                 this.creature1NextHit += this.creature1.attackSpeed;

@@ -115,7 +115,7 @@ var HeroUtils = {
     },
     
     checkFlee: function (rule:HeroRule, hero:Hero, monster:Creature):boolean{
-        console.log('checkFlee - rule:', rule.type);
+        // console.log('checkFlee - rule:', rule.type);
         
         switch(rule.type)
         {

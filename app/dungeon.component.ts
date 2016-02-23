@@ -131,20 +131,10 @@ export class DungeonComponent implements OnInit {
             threshold:2,
             thresholdTypePercentage:false
         };
-        console.log('dungeon.component.heroRule2', heroRule2.type);
-        console.log('dungeon.component.heroRule2', heroRule2.threshold);
-        console.log('dungeon.component.heroRule2', heroRule2.thresholdTypePercentage);
-        
+
         
         this.heroRules.push(heroRule2);
-        
-        console.log('dungeon.component.heroRules[1]', this.heroRules[1].threshold);
-        
-        console.log('dungeon.component.buildHeroRules()');
-        for(let rule of this.heroRules){
-            console.log('rule:', rule.type, '-', rule.threshold, ':', rule.thresholdTypePercentage);
-        }
-        
+
         return this.heroRules;
     }
     
