@@ -1,6 +1,6 @@
 <!--Fight Commentary text:-->
 <div *ngIf="!fightError">
-    {{fightType | uppercase}}  Started!
+    <!--{{fightType | uppercase}}  Started!-->
     <div *ngFor="#fightCommentary of fightCommentarys"  >
         <div *ngIf="fightCommentary.hitConnected">            
             <span [ngClass]="{creature1name:fightCommentary.attacker.id == creature1.id, 

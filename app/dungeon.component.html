@@ -29,51 +29,8 @@
             <div>Encountered: {{activeMonster.name}} (level {{activeMonster.level}}) </div>
             <div><label>id: </label>{{activeMonster.id}}</div>
         </div>
-        <!--Fight Result text:-->
-        <div *ngIf="fightStarted">Fight Started!
-            <div *ngFor="#fightCommentary of fightCommentarys"  >
-                <div *ngIf="fightCommentary.hitConnected">            
-                    <span [ngClass]="{heroName:fightCommentary.attacker.id == selectedHero.id}">
-                        {{fightCommentary.attacker.name}}</span> hit 
-                    <span [ngClass]="{heroName:fightCommentary.attacker.id == selectedHero.id}">
-                        {{fightCommentary.defender.name}}</span> for 
-                    {{fightCommentary.damage}} damage,
-                    {{fightCommentary.remainingHp}} remaining HPs.
-                    
-                </div>
-                <div *ngIf="!fightCommentary.hitConnected">            
-                    <span [ngClass]="{heroName:fightCommentary.attacker.id == selectedHero.id}">
-                        {{fightCommentary.attacker.name}}</span> missed 
-                    <span [ngClass]="{heroName:fightCommentary.attacker.id == selectedHero.id}">
-                        {{fightCommentary.defender.name}}</span>.
-                    
-                </div>
-            </div>
-            <div *ngIf="selectedHeroIsDead" class="heroName">
-                {{selectedHero.name}} is Dead.
-            </div>
-            <div *ngIf="activeMonsterIsDead" class="monsterName">
-                {{activeMonster.name}} is Dead.
-            </div>
-            <br>
-            <div *ngIf="fightResult"> Fight Ended:
-                <div *ngIf="fightResult.resultTie" >
-                    Fight ended in a tie.     
-                </div>
-                <div *ngIf="!fightResult.resultTie" >
-                    <span >
-                                      {{fightResult.winner.name}} </span>
-                                      defeated 
-                    <span >
-                                      {{fightResult.loser.name}}.
-                                      </span>
-                   <span >
-                                       {{fightResult.winner.name}} 
-                                       </span>
-                                       gained {{fightResult.experienceGained}} xp.
-                </div>
-            </div>
-        </div>
+        <!--Fight Commentary text:-->
+        <fight-component #fightComponent></fight-component>
     </div>
 
 

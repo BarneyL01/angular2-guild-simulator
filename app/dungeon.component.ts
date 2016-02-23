@@ -15,10 +15,13 @@ import HeroUtils from './hero-utils';
 import CreatureUtils from './creature-utils'
 import DungeonUtils from './dungeon-utils'
 
+import { FightComponent } from './fight.component';
+
+
 @Component({
   selector: 'my-dungeon-component',
   templateUrl : 'app/dungeon.component.html',
-  directives: [NgClass],
+  directives: [NgClass, FightComponent],
   styleUrls: ['app/dungeon.component.css']
 })
 
@@ -33,6 +36,7 @@ export class DungeonComponent implements OnInit {
     selectedDungeon:Dungeon;
     
     fightEngine:FightEngine;
+    @ViewChild(FightComponent) fightComponent:FightComponent;
     
     heroUnselected:boolean = false;
     dungeonUnselected:boolean = false;
@@ -85,21 +89,16 @@ export class DungeonComponent implements OnInit {
             this.dungeonStarted = true;
             
             // TODO: add stepper (decision to keep fighting, queue next monster)
-            // Create new monster copy. Currently a pointer to a monster.
+            // TODO: Create new monster copy. Currently a pointer to a monster.
             this.activeMonster = DungeonUtils.getMonster(this.selectedDungeon, this.monsters);
             this.fightStarted = true;
-            // clear existing fight commentary: 
-            this.fightCommentarys = [];
-
-            this.fightEngine = new FightEngine(this.selectedHero, this.activeMonster, this.fightCommentarys);
-            // this.fightCommentarys = this.fightEngine.fight(); 
+            this.fightResult = this.fightComponent.startFight(this.selectedHero, this.activeMonster);
             
             this.resolveFightResults();
         }
     }
     
     resolveFightResults() {
-        this.fightResult = this.fightEngine.fight();
 
         this.selectedHeroIsDead = CreatureUtils.isDead(this.selectedHero);
         this.activeMonsterIsDead = CreatureUtils.isDead(this.activeMonster);
