@@ -1,4 +1,5 @@
 import { Hero } from './hero';
+import { HeroRule } from './hero-rule';
 import { Creature } from './creature';
 
 /*
@@ -111,6 +112,32 @@ var HeroUtils = {
         // Eventually need to update for fear & hp rules.
         // Currently just checking if hero is above 10% hp.
         return (hero.hitPoints >= (hero.maxHitPoints/10));
+    },
+    
+    checkFlee: function (rule:HeroRule, hero:Hero, monster:Creature):boolean{
+        console.log('checkFlee - rule:', rule.type);
+        
+        switch(rule.type)
+        {
+            case 'HP':
+                if(rule.thresholdTypePercentage){
+                    return (hero.hitPoints <= (hero.maxHitPoints/100*rule.threshold));
+                }else{
+                    return (hero.hitPoints <= rule.threshold);
+                }
+                break;
+            case 'Fear':
+                // Not implemented
+                break;
+            case 'Phobia':
+                if(rule.monsterTypeMatch == null || monster.subtype == null){
+                    return false;
+                }else{
+                    return (rule.monsterTypeMatch == monster.subtype);
+                }
+            
+        }
+        return false;
     }
 }
 

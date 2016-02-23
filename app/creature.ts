@@ -2,6 +2,7 @@ export interface Creature {
   id: number;
   name: string;
   type: string;
+  subtype?:string;
   
   strength: number;
   dexterity: number;

@@ -15,6 +15,8 @@ import HeroUtils from './hero-utils';
 import CreatureUtils from './creature-utils'
 import DungeonUtils from './dungeon-utils'
 
+import {HeroRule} from './hero-rule';
+
 import { FightComponent } from './fight.component';
 
 
@@ -34,6 +36,7 @@ export class DungeonComponent implements OnInit {
     fightResult: FightResult;
     selectedHero:Hero;
     selectedDungeon:Dungeon;
+    heroRules:HeroRule[];
     
     monstersFought: string[] = [];
     
@@ -95,7 +98,8 @@ export class DungeonComponent implements OnInit {
             // this.activeMonster = DungeonUtils.spawnMonster(this.selectedDungeon, this.monsters);
             
             // this.fightResult = this.fightComponent.startFight(this.selectedHero, this.activeMonster, false);
-        
+            this.fightComponent.setHeroRules(this.buildHeroRules());
+            
             for(var i = 0; i < dungeonLength && HeroUtils.isHeroOk(this.selectedHero); i++)
             {
                     this.fightMonster();
@@ -104,6 +108,44 @@ export class DungeonComponent implements OnInit {
             
             this.selectedHeroIsDead = CreatureUtils.isDead(this.selectedHero);            
         }
+    }
+    
+    /**
+     * At the moment this is a STUB.
+     * TODO: Need to collect rules from Guild + Hero. 
+    */
+    buildHeroRules():HeroRule[]{
+        
+        this.heroRules = [];
+        
+        var heroRule1:HeroRule = {
+            type:"HP",
+            threshold:10,
+            thresholdTypePercentage:true
+        };
+        
+        this.heroRules.push(heroRule1);
+        
+        var heroRule2:HeroRule = {
+            type:"HP",
+            threshold:2,
+            thresholdTypePercentage:false
+        };
+        console.log('dungeon.component.heroRule2', heroRule2.type);
+        console.log('dungeon.component.heroRule2', heroRule2.threshold);
+        console.log('dungeon.component.heroRule2', heroRule2.thresholdTypePercentage);
+        
+        
+        this.heroRules.push(heroRule2);
+        
+        console.log('dungeon.component.heroRules[1]', this.heroRules[1].threshold);
+        
+        console.log('dungeon.component.buildHeroRules()');
+        for(let rule of this.heroRules){
+            console.log('rule:', rule.type, '-', rule.threshold, ':', rule.thresholdTypePercentage);
+        }
+        
+        return this.heroRules;
     }
     
     checkErrors():boolean{

@@ -6,6 +6,7 @@ import CreatureUtils from './creature-utils';
 import HeroUtils from './hero-utils';
 import GeneralUtils from './general-utils';
 import {FightResult} from './fight-result';
+import {HeroRule} from './hero-rule';
 
 export class FightEngine {
     creature1:Creature;
@@ -22,9 +23,23 @@ export class FightEngine {
     swingTimer:number;
     fightTimerMax:number = 500;
     
+    // Assume Hero is creature 1.
+    heroRules:HeroRule[];
+    
     constructor(creature1:Creature, creature2:Creature){
         this.creature1 = creature1;
         this.creature2 = creature2;
+    }
+    
+    setHeroRules(heroRules:HeroRule[]){
+        this.heroRules = heroRules;
+        
+        console.log('fight-engine.setHeroRules()')
+        for(let rule of this.heroRules){
+            console.log('rule:', rule.type, '-', rule.threshold, ':', rule.thresholdTypePercentage);
+        }
+        
+        
     }
     
     fight():FightResult{
@@ -43,10 +58,12 @@ export class FightEngine {
         
         // Put max on swingTimer so that this doesn't go stupid while I haven't fully tested
         for(this.swingTimer = 0; 
-            this.swingTimer < this.fightTimerMax && !this.checkCreatureDeath(); 
+            this.swingTimer < this.fightTimerMax 
+                && !this.checkCreatureDeath()
+                && !this.checkHeroRules(); 
             this.swingTimer++){
                 
-            // console.log(this.swingTimer);
+            console.log(this.swingTimer, ': checkHeroRules():', this.checkHeroRules());
             if(this.creature1NextHit == this.swingTimer){
                 this.fightResult.fightCommentary.push(this.creatureAttack(this.creature1, this.creature2));
                 this.creature1NextHit += this.creature1.attackSpeed;
@@ -56,6 +73,8 @@ export class FightEngine {
                 this.fightResult.fightCommentary.push(this.creatureAttack(this.creature2, this.creature1));
                 this.creature2NextHit += this.creature2.attackSpeed;
             }
+            
+            
         }
         
         
@@ -89,9 +108,22 @@ export class FightEngine {
         return this.fightResult;
     }
     
-    checkCreatureDeath(){
+    checkCreatureDeath():boolean{
         return (CreatureUtils.isDead(this.creature1) || 
                 CreatureUtils.isDead(this.creature2));
+    }
+    
+    /** 
+     * Check if there is any reason for hero to flee.
+    */
+    checkHeroRules():boolean{
+        if(!HeroUtils.isHero(this.creature1)) return false;
+        
+        for(let rule of this.heroRules){
+            if(HeroUtils.checkFlee(rule, <Hero>this.creature1, this.creature2)) return true;
+        }
+        
+        return false;
     }
     
     creatureAttack(attacker:Creature, defender:Creature):Hit{

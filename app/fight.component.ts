@@ -12,6 +12,8 @@ import HeroUtils from './hero-utils';
 import CreatureUtils from './creature-utils'
 import DungeonUtils from './dungeon-utils'
 
+import {HeroRule} from './hero-rule';
+
 @Component({
   selector: 'fight-component',
   templateUrl : 'app/fight.component.html',
@@ -32,11 +34,17 @@ export class FightComponent{
     
     fightType:string = "Fight";
     
+    heroRules:HeroRule[] = [];
+    
     constructor() {
     }
     
     setFightType(fightType:string):void{
         this.fightType = fightType;
+    }
+    
+    setHeroRules(heroRules:HeroRule[]){
+        this.heroRules = heroRules;
     }
     
     startFight(creature1:Creature, creature2:Creature):FightResult{
@@ -50,6 +58,7 @@ export class FightComponent{
         
         this.fightStarted = true;
         this.fightEngine = new FightEngine(creature1, creature2);
+        this.fightEngine.setHeroRules(this.heroRules);
         
         var newFightResults:FightResult = this.fightEngine.fight()
         this.fightResults.push(newFightResults);
