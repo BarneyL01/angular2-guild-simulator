@@ -23,16 +23,20 @@ var DungeonUtils = {
         for(let monster of dungeon.monsterArray){
             totalMonsterWeights += monster.value;
             monsterWeights.push({"id": monster.id, "value":totalMonsterWeights});
+            // console.log('spawnMonster - monsterWeights', monster.id, ': ', totalMonsterWeights);
         }
-        var pickMonster:number = GeneralUtils.randomNumber(totalMonsterWeights);
         
+        var pickMonster:number = GeneralUtils.randomNumber(totalMonsterWeights);
+        // console.log('spawnMonster - pickMonster', pickMonster);
         var pickedMonsterId:number;
         for(let weight of monsterWeights){
-            if(pickMonster < weight.value){
+            // console.log('spawnMonster - monsterWeights', weight.id, ': ', weight.value);
+            if(pickMonster <= weight.value){
                 pickedMonsterId = weight.id;
                 break;
             }
         }
+        // console.log('spawnMonster - pickedMonsterId', pickedMonsterId);
         return GeneralUtils.copyObject(CreatureUtils.getById(monsters, pickedMonsterId));
     },
     

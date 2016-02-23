@@ -30,7 +30,7 @@
             <div><label>id: </label>{{activeMonster.id}}</div>
         </div>
         <!--Fight Commentary text:-->
-        <fightList></fightList>
+        <fight-component #fightComponent></fight-component>
     </div>
     <div class="rightColumn">
         Fight til 10% (need to change this to selectable rule)
@@ -38,11 +38,19 @@
         <br>
         Monsters Fought:
         <ul>
-        <li *ngFor="#monster of monstersFought">
-            Fought: {{monster}}.
-        </li>
+            <li *ngFor="#monster of monstersFought">
+                Fought: {{monster}}.
+            </li>
 
-    </ul>
+        </ul>
+        <br>
+        Monsterlist:
+        <ul>
+            <li *ngFor="#monster of monsters">
+                Monster: [{{monster.id}}] {{monster.name}} - {{monster.hitPoints}}/ {{monster.maxHitPoints}} 
+            </li>
+
+        </ul>
     </div>
 
 </div>
