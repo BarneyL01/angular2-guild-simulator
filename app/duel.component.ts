@@ -91,7 +91,7 @@ export class DuelComponent implements OnInit {
             this.duelError = false;
             this.fightStarted = true;
             
-            this.fightResult = this.fightComponent.startFight(this.selectedHero1, this.selectedHero2);
+            this.fightResult = this.fightComponent.startFight(this.selectedHero1, this.selectedHero2, true);
             
             this.resolveFightResults();
         }
@@ -121,7 +121,7 @@ export class DuelComponent implements OnInit {
     }
 
     resetHp(){
-        //console.log('resethp not implemented');
+        
         HeroUtils.resetAllHp(this.heroes);
     }
 }

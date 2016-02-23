@@ -20,7 +20,7 @@ import DungeonUtils from './dungeon-utils'
 })
 
 export class FightComponent{
-    fightCommentarys:Hit[];
+    fightCommentarys:Hit[] = [];
     fightEngine:FightEngine;
     fightResult:FightResult;
     
@@ -38,7 +38,7 @@ export class FightComponent{
         this.fightType = fightType;
     }
     
-    startFight(creature1:Creature, creature2:Creature):FightResult{
+    startFight(creature1:Creature, creature2:Creature, resetCommentary:boolean):FightResult{
         this.creature1 = creature1;
         this.creature2 = creature2;
         
@@ -46,7 +46,7 @@ export class FightComponent{
         if(this.fightError) return;
         
         // Reset to empty commentary:
-        this.fightCommentarys = [];
+        if(resetCommentary) this.fightCommentarys = [];
 
         this.fightEngine = new FightEngine(creature1, creature2, this.fightCommentarys);
                         
@@ -57,5 +57,9 @@ export class FightComponent{
     
     resolveFightResults(){
         
+    }
+    
+    resetCommentary(){
+        this.fightCommentarys = [];
     }
 }

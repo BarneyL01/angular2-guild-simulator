@@ -9,5 +9,7 @@ export interface Dungeon {
     -- weight being number/chance of occuring in the dungeon, i.e. 
     -- [{monster1, 2}, {monster2, 1}] -- monster1 should appear twice as much as monster2*/
   monsterArray:IdValuePair<number>[];
+  minDungeonLength:number;
+  maxDungeonLength:number;
   
 }

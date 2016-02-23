@@ -1,7 +1,9 @@
 import { Creature } from './creature';
+import { Hero } from './hero';
 // import { HeroService } from './hero.service';
 import { Hit } from './hit';
 import CreatureUtils from './creature-utils';
+import HeroUtils from './hero-utils';
 import GeneralUtils from './general-utils';
 import {FightResult} from './fight-result';
 
@@ -70,12 +72,16 @@ export class FightEngine {
             if(CreatureUtils.isDead(this.creature1)){
                 this.fightResult.winner = this.creature2;
                 this.fightResult.loser = this.creature1;
-                this.fightResult.experienceGained = CreatureUtils.getExperienceIfKilled(this.creature1);
+                this.fightResult.experienceGained = CreatureUtils.getExperienceIfKilled(this.creature1);                
             }else{
                 // creature 1 won.
                 this.fightResult.winner = this.creature1;
                 this.fightResult.loser = this.creature2;
                 this.fightResult.experienceGained = CreatureUtils.getExperienceIfKilled(this.creature2);
+            }
+            
+            if(HeroUtils.isHero(this.fightResult.winner)){
+                HeroUtils.updateExperience(<Hero>this.fightResult.winner, this.fightResult.experienceGained);
             }
         }
         return this.fightResult;

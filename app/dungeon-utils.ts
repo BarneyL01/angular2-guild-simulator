@@ -17,7 +17,7 @@ var DungeonUtils = {
         return ;
     },
     
-    getMonster: function(dungeon:Dungeon, monsters:Creature[]):Creature{
+    spawnMonster: function(dungeon:Dungeon, monsters:Creature[]):Creature{
         var monsterWeights:IdValuePair<number>[] = [];
         var totalMonsterWeights:number = 0;
         for(let monster of dungeon.monsterArray){
@@ -33,7 +33,11 @@ var DungeonUtils = {
                 break;
             }
         }
-        return CreatureUtils.getById(monsters, pickedMonsterId);
+        return GeneralUtils.copyObject(CreatureUtils.getById(monsters, pickedMonsterId));
+    },
+    
+    generateDungeonLength: function(dungeon:Dungeon):number{
+        return (GeneralUtils.randomIntFromInterval(dungeon.minDungeonLength,dungeon.maxDungeonLength));
     }
     
     

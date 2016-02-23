@@ -6,7 +6,7 @@
             <option *ngFor="#hero of heroes" [value]="hero.id">{{hero.name}}</option>
         </select>
 
-        <select #selectDungeon [ngModel]="dungeons" (change)="setDungeon($event.target.value)">
+        <select #selectDungeon [disabled]="dungeonStarted" [ngModel]="dungeons" (change)="setDungeon($event.target.value)">
             <option *ngFor="#dungeon of dungeons" [value]="dungeon.id">{{dungeon.name}}</option>
         </select>
         <div>Send 
@@ -30,8 +30,19 @@
             <div><label>id: </label>{{activeMonster.id}}</div>
         </div>
         <!--Fight Commentary text:-->
-        <fight-component #fightComponent></fight-component>
+        <fightList></fightList>
     </div>
+    <div class="rightColumn">
+        Fight til 10% (need to change this to selectable rule)
+        
+        <br>
+        Monsters Fought:
+        <ul>
+        <li *ngFor="#monster of monstersFought">
+            Fought: {{monster}}.
+        </li>
 
+    </ul>
+    </div>
 
 </div>

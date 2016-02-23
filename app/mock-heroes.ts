@@ -2,7 +2,8 @@ import {Hero} from './hero';
 
 export var HEROES: Hero[] = [
     {"id": 11, 
-        "name": "Mr. Nice",  
+        "name": "Mr. Nice", 
+        "type": "Hero", 
         "strength": 1,
         "dexterity": 1.3,
         "hitPoints":10,
@@ -13,6 +14,7 @@ export var HEROES: Hero[] = [
     },
     {"id": 12, 
         "name": "Narco",
+        "type": "Hero",
         "strength": 2,
         "dexterity": 1,
         "hitPoints":11,
@@ -23,6 +25,7 @@ export var HEROES: Hero[] = [
     },
     {"id": 13, 
         "name": "Bombasto",
+        "type": "Hero",
         "strength": 1,
         "dexterity": 1,
         "hitPoints":9,

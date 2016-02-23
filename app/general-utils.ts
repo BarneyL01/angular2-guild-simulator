@@ -5,7 +5,26 @@ var GeneralUtils = {
     },
     
     randomNumber: function (numOutOf:number){
-        return Math.floor(Math.random()*numOutOf);
+        return this.randomIntFromInterval(0, numOutOf);
+    },
+    
+    randomIntFromInterval: function(min: number, max: number)
+    {
+        return Math.floor(Math.random()*(max-min+1)+min);
+    },
+    
+    copyObject: function<T>(object:T): T {
+        var objectCopy = <T>{};
+
+        for (var key in object)
+        {
+            if (object.hasOwnProperty(key))
+            {
+                objectCopy[key] = object[key];
+            }
+        }
+
+        return objectCopy;
     }
     
 }

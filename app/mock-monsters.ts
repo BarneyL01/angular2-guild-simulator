@@ -3,6 +3,7 @@ import {Creature} from './creature';
 export var MONSTERS: Creature[] = [
     {"id": 101, 
         "name": "Green Slime",  
+        "type": "Monster",
         "strength": 1,
         "dexterity": 1,
         "hitPoints":3,
@@ -13,6 +14,7 @@ export var MONSTERS: Creature[] = [
     },
     {"id": 102, 
         "name": "Blue Slime",
+        "type": "Monster",
         "strength": 2,
         "dexterity": 1,
         "hitPoints":8,
@@ -23,6 +25,7 @@ export var MONSTERS: Creature[] = [
     },
     {"id": 103, 
         "name": "Rat",
+        "type": "Monster",
         "strength": 1,
         "dexterity": 1,
         "hitPoints":4,

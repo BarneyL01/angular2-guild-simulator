@@ -35,6 +35,8 @@ export class DungeonComponent implements OnInit {
     selectedHero:Hero;
     selectedDungeon:Dungeon;
     
+    monstersFought: string[] = [];
+    
     fightEngine:FightEngine;
     @ViewChild(FightComponent) fightComponent:FightComponent;
     
@@ -79,23 +81,46 @@ export class DungeonComponent implements OnInit {
     }
     
     startDungeon():void{
+        
+        
+        this.enterDungeonError = this.checkErrors();
+        
+        if(!this.enterDungeonError){
+            this.dungeonStarted = true; // disables selectors
+            var dungeonLength = DungeonUtils.generateDungeonLength(this.selectedDungeon);
+            console.log('dungeonLength: ', dungeonLength);
+            
+            // this.fightMonster();
+            
+            // this.activeMonster = DungeonUtils.spawnMonster(this.selectedDungeon, this.monsters);
+            
+            // this.fightResult = this.fightComponent.startFight(this.selectedHero, this.activeMonster, false);
+        
+            for(var i = 0; i < dungeonLength && HeroUtils.isHeroOk(this.selectedHero); i++)
+            {
+                
+                setTimeout(this.fightMonster(), 1000);
+            }            
+            
+            this.resolveFightResults();
+        }
+    }
+    
+    checkErrors():boolean{
         this.heroUnselected = (this.selectedHero == null);
         this.selectedHeroIsDead = CreatureUtils.isDead(this.selectedHero);
         this.dungeonUnselected = (this.selectedDungeon == null);
         
-        this.enterDungeonError = (this.heroUnselected || this.selectedHeroIsDead || this.dungeonUnselected);
-        
-        if(!this.enterDungeonError){
-            this.dungeonStarted = true;
+        return (this.heroUnselected || this.selectedHeroIsDead || this.dungeonUnselected);
+    }
+    
+    private fightMonster():void{
+        // This probably should already have been checked earlier:
+        if(this.checkErrors()) return;
+        var newMonster:Creature = DungeonUtils.spawnMonster(this.selectedDungeon, this.monsters);
+        this.monstersFought.push(newMonster.name);
             
-            // TODO: add stepper (decision to keep fighting, queue next monster)
-            // TODO: Create new monster copy. Currently a pointer to a monster.
-            this.activeMonster = DungeonUtils.getMonster(this.selectedDungeon, this.monsters);
-            this.fightStarted = true;
-            this.fightResult = this.fightComponent.startFight(this.selectedHero, this.activeMonster);
-            
-            this.resolveFightResults();
-        }
+        this.fightResult = this.fightComponent.startFight(this.selectedHero, newMonster, false);
     }
     
     resolveFightResults() {

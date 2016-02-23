@@ -1,4 +1,5 @@
 import { Hero } from './hero';
+import { Creature } from './creature';
 
 /*
     Revealing Module Pattern, for singleton function processor
@@ -96,9 +97,21 @@ var HeroUtils = {
             hero.hitPoints = hero.maxHitPoints;
         }
         return;
+    },
+    
+    isHero: function (creature:Creature):boolean{
+        return (creature.type == "Hero");
+    },
+    
+    updateExperience: function(hero:Hero, experienceGained:number):void{
+        hero.experience += experienceGained;
+    },
+    
+    isHeroOk: function (hero:Hero):boolean{
+        // Eventually need to update for fear & hp rules.
+        // Currently just checking if hero is above 10% hp.
+        return (hero.hitPoints >= (hero.maxHitPoints/10));
     }
-    
-    
 }
 
 export default HeroUtils;
