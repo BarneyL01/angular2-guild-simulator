@@ -7,4 +7,5 @@ export interface FightResult{
     experienceGained:number;
     resultTie:boolean;
     fightCommentary:Hit[];
+    heroFled:boolean;
 }

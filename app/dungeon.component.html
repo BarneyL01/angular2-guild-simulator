@@ -56,5 +56,8 @@
         <!--Fight Commentary text:-->
         <fight-component #fightComponent></fight-component>
         <div *ngIf="selectedHeroIsDead">{{selectedHero.name}} has died.</div>
+        <div *ngIf="fightResult">
+            <div *ngIf="fightResult.heroFled">{{selectedHero.name}} has fled the dungeon.</div>
+        </div>
     </div>
 </div>

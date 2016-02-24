@@ -46,14 +46,15 @@ export class FightEngine {
                 loser: null,
                 experienceGained:0, 
                 resultTie: false,
-                fightCommentary: []
+                fightCommentary: [],
+                heroFled: false
         };
         
         // Put max on swingTimer so that this doesn't go stupid while I haven't fully tested
         for(this.swingTimer = 0; 
             this.swingTimer < this.fightTimerMax 
                 && !this.checkCreatureDeath()
-                && !this.checkHeroRules(); 
+                && !this.checkHeroFlee(); 
             this.swingTimer++){
                 
             // console.log(this.swingTimer, ': checkHeroRules():', this.checkHeroRules());
@@ -70,34 +71,43 @@ export class FightEngine {
             
         }
         
-        
-        
-        // tie fight
-        if(CreatureUtils.isDead(this.creature1) && 
-                CreatureUtils.isDead(this.creature2))
-        {
-            // arbitrarily still set winner & loser
-            this.fightResult.winner = this.creature1;
-            this.fightResult.loser = this.creature2;
-            
-            this.fightResult.resultTie = true;
+        if(this.checkHeroFlee()){
+            // Hero Fled, no experience gained, technically hero lost.
+            this.fightResult.winner = this.creature2;
+            this.fightResult.loser = this.creature1;
+            this.fightResult.heroFled = true;
         }else{
-                // creature 2 won.
-            if(CreatureUtils.isDead(this.creature1)){
-                this.fightResult.winner = this.creature2;
-                this.fightResult.loser = this.creature1;
-                this.fightResult.experienceGained = CreatureUtils.getExperienceIfKilled(this.creature1);                
-            }else{
-                // creature 1 won.
+            // tie fight
+            if(CreatureUtils.isDead(this.creature1) && 
+                    CreatureUtils.isDead(this.creature2))
+            {
+                // arbitrarily still set winner & loser
                 this.fightResult.winner = this.creature1;
                 this.fightResult.loser = this.creature2;
-                this.fightResult.experienceGained = CreatureUtils.getExperienceIfKilled(this.creature2);
-            }
-            
-            if(HeroUtils.isHero(this.fightResult.winner)){
-                HeroUtils.updateExperience(<Hero>this.fightResult.winner, this.fightResult.experienceGained);
+                
+                this.fightResult.resultTie = true;
+            }else{
+                    // Creature 1 died : Creature 2 won.
+                if(CreatureUtils.isDead(this.creature1)){
+                    this.fightResult.winner = this.creature2;
+                    this.fightResult.loser = this.creature1;
+                    this.fightResult.experienceGained = CreatureUtils.getExperienceIfKilled(this.creature1);                
+                }else{
+                    // creature 1 won.
+                    this.fightResult.winner = this.creature1;
+                    this.fightResult.loser = this.creature2;
+                    this.fightResult.experienceGained = CreatureUtils.getExperienceIfKilled(this.creature2);
+                }
+                
+                if(HeroUtils.isHero(this.fightResult.winner)){
+                    HeroUtils.updateExperience(<Hero>this.fightResult.winner, this.fightResult.experienceGained);
+                }
             }
         }
+        
+        
+        
+        
         return this.fightResult;
     }
     
@@ -109,7 +119,7 @@ export class FightEngine {
     /** 
      * Check if there is any reason for hero to flee.
     */
-    checkHeroRules():boolean{
+    checkHeroFlee():boolean{
         if(!HeroUtils.isHero(this.creature1)) return false;
         
         for(let rule of this.heroRules){

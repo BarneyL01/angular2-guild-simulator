@@ -100,10 +100,10 @@ export class DungeonComponent implements OnInit {
             // this.fightResult = this.fightComponent.startFight(this.selectedHero, this.activeMonster, false);
             this.fightComponent.setHeroRules(this.buildHeroRules());
             
-            for(var i = 0; i < dungeonLength && HeroUtils.isHeroOk(this.selectedHero); i++)
+            for(var i = 0; i < dungeonLength; i++)
             {
-                    this.fightMonster();
-            
+                    this.fightResult = this.fightMonster();
+                    if(this.fightResult.heroFled == true) break;
             }
             
             this.selectedHeroIsDead = CreatureUtils.isDead(this.selectedHero);            
@@ -146,13 +146,13 @@ export class DungeonComponent implements OnInit {
         return (this.heroUnselected || this.selectedHeroIsDead || this.dungeonUnselected);
     }
     
-    private fightMonster():void{
+    private fightMonster():FightResult{
         // This probably should already have been checked earlier:
         if(this.checkErrors()) return;
         var newMonster:Creature = DungeonUtils.spawnMonster(this.selectedDungeon, this.monsters);
         this.monstersFought.push(newMonster.name);
             
-        this.fightResult = this.fightComponent.startFight(this.selectedHero, newMonster);
+        return this.fightComponent.startFight(this.selectedHero, newMonster);
     }
     
 }

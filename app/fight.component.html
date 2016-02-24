@@ -34,7 +34,7 @@
             <div *ngIf="fightResult.resultTie" >
                 {{fightType}} ended in a tie.     
             </div>
-            <div *ngIf="!fightResult.resultTie" >
+            <div *ngIf="!fightResult.resultTie && !fightResult.heroFled" >
                 <span [ngClass]="{creature1name:fightResult.winner.id == creature1.id, 
                                     creature2name:fightResult.winner.id == creature2.id}">
                                     {{fightResult.winner.name}} </span>
@@ -48,6 +48,10 @@
                                     {{fightResult.winner.name}} 
                                     </span>
                                     gained {{fightResult.experienceGained}} xp.
+            </div>
+            <div *ngIf="fightResult.heroFled" >
+                <span class="creature1name"> {{creature1.name}} </span> fled battle. 
+                <span class="creature1name"> {{creature1.name}} </span> ended on {{creature1.hitPoints}} HP.         
             </div>
         </div>
         <br>

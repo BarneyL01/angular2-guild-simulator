@@ -11,5 +11,4 @@ export interface Creature {
   attackSpeed:number;
   level:number;
   experienceIfKilled?:number;
-  
 }

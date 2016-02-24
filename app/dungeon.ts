@@ -11,5 +11,6 @@ export interface Dungeon {
   monsterArray:IdValuePair<number>[];
   minDungeonLength:number;
   maxDungeonLength:number;
-  
+  creatureGoldMin:number;
+  creatureGoldMax:number;
 }
