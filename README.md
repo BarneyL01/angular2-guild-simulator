@@ -1,2 +1,3 @@
-# angular2-tour-of-heroes
-# My attempt at https://angular.io/docs/ts/latest/tutorial/
+# angular2-guild-simulator
+# Started out as my attempt at https://angular.io/docs/ts/latest/tutorial/
+# Has become a Tycoon game simulating running a guild of heroes.
