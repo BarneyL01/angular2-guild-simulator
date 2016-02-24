@@ -4,4 +4,8 @@ export interface Hero extends Creature{
     duelWins?:number;
     duelLosses?:number;
     rank?:number;
+    /*fear:number;
+    happiness:number;
+    obviousTrait:number;
+    hiddenTraits:number[];*/
 }
