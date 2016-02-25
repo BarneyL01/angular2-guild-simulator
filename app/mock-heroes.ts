@@ -33,6 +33,17 @@ export var HEROES: Hero[] = [
         "attackSpeed": 3,
         "level":1,
         "experience":0
+    },
+    {"id": 14, 
+        "name": "Ms. Sparkle",
+        "type": "Hero",
+        "strength": 0.8,
+        "dexterity": 1.4,
+        "hitPoints":10,
+        "maxHitPoints":10,
+        "attackSpeed": 3,
+        "level":1,
+        "experience":0
     }
 
 ];

@@ -3,7 +3,8 @@ import { Router } from 'angular2/router';
 import { NgClass } from 'angular2/common';
 
 import { Hero } from './hero';
-import { HeroService } from './hero.service';
+import { Guild } from './guild';
+import { GuildService } from './guild.service';
 import { Hit } from './hit';
 import { FightEngine } from './fight-engine';
 import { FightComponent } from './fight.component';
@@ -19,7 +20,7 @@ import CreatureUtils from './creature-utils'
 })
 
 export class DuelComponent implements OnInit {
-    heroes: Hero[] = [];
+    guild:Guild;
     heroesByrank: Hero[] = [];
     fightCommentarys: Hit[] = [];
     fightResult: FightResult;
@@ -43,20 +44,16 @@ export class DuelComponent implements OnInit {
     
     constructor(
         private _router: Router,
-        private _heroService: HeroService) {
+        private _guildService: GuildService) {
             
     }
 
     ngOnInit() {
-        
-         this._heroService.getHeroes()
-            .then(heroes => {
-                this.heroes = heroes;
-                this.heroesByrank = HeroUtils.heroListByRank(this.heroes);
+        this._guildService.getGuild()
+            .then(guild => {
+                this.guild = guild;
+                this.heroesByrank = HeroUtils.heroListByRank(this.guild.heroes);
             });
-        
-            
-         
     }
     
 /*    gotoDetail(hero: Hero) {
@@ -70,9 +67,9 @@ export class DuelComponent implements OnInit {
     */
     setHero(whichHero:number, id:number){
         if (whichHero == 1) {
-            this.selectedHero1 = HeroUtils.getById(this.heroes,id);
+            this.selectedHero1 = HeroUtils.getById(this.guild.heroes,id);
         } else {
-            this.selectedHero2 = HeroUtils.getById(this.heroes,id);
+            this.selectedHero2 = HeroUtils.getById(this.guild.heroes,id);
         }
         this.fightStarted = false;
         this.duelError=false;
@@ -115,20 +112,20 @@ export class DuelComponent implements OnInit {
         // console.log('type', typeof this.fightResult.winner)
         if (!this.fightResult.resultTie) {
             // Update wins/losses
-            HeroUtils.updateDuel(this.heroes, this.fightResult.winner.id, true);
-            HeroUtils.updateDuel(this.heroes, this.fightResult.loser.id, false);
+            HeroUtils.updateDuel(this.guild.heroes, this.fightResult.winner.id, true);
+            HeroUtils.updateDuel(this.guild.heroes, this.fightResult.loser.id, false);
         } else {
             // In a tie, both lose.
-            HeroUtils.updateDuel(this.heroes, this.fightResult.winner.id, false);
-            HeroUtils.updateDuel(this.heroes, this.fightResult.loser.id, false);
+            HeroUtils.updateDuel(this.guild.heroes, this.fightResult.winner.id, false);
+            HeroUtils.updateDuel(this.guild.heroes, this.fightResult.loser.id, false);
         }
 
-        HeroUtils.updateRank(this.heroes);
-        this.heroesByrank = HeroUtils.heroListByRank(this.heroes);
+        HeroUtils.updateRank(this.guild.heroes);
+        this.heroesByrank = HeroUtils.heroListByRank(this.guild.heroes);
     }
 
     resetHp(){
         
-        HeroUtils.resetAllHp(this.heroes);
+        HeroUtils.resetAllHp(this.guild.heroes);
     }
 }

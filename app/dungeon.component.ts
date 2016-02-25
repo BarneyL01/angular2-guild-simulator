@@ -2,12 +2,15 @@ import { Component, OnInit, ViewChild} from 'angular2/core';
 import { Router } from 'angular2/router';
 import {NgClass} from 'angular2/common';
 
+
+import { Guild } from './guild';
 import { Hero } from './hero';
 import { Creature } from './creature';
 import { Dungeon } from './dungeon';
 import { HeroService } from './hero.service';
 import { DungeonService } from './dungeon.service';
 import { MonsterService } from './monster.service';
+import { GuildService } from './guild.service';
 import { Hit } from './hit';
 import { FightEngine } from './fight-engine';
 import {FightResult} from './fight-result';
@@ -28,7 +31,7 @@ import { FightComponent } from './fight.component';
 })
 
 export class DungeonComponent implements OnInit {
-    heroes: Hero[] = [];
+    guild: Guild;
     dungeons: Dungeon[] = [];
     activeMonster:Creature;
     monsters: Creature[] = [];
@@ -58,16 +61,13 @@ export class DungeonComponent implements OnInit {
     
     constructor(
         private _router: Router,
-        private _heroService: HeroService,
+        private _guildService: GuildService,
         private _dungeonService: DungeonService,
         private _monsterService: MonsterService) {
     }
     
     ngOnInit() {
-        this._heroService.getHeroes()
-            .then(heroes => {
-                this.heroes = heroes;
-            });
+        this._guildService.getGuild().then(guild => this.guild = guild);
             
         this._dungeonService.getDungeons().then(dungeons => this.dungeons = dungeons);
         this._monsterService.getMonsters().then(monsters => this.monsters = monsters);
@@ -76,7 +76,7 @@ export class DungeonComponent implements OnInit {
     }
     
     setHero(id:number){
-        this.selectedHero = HeroUtils.getById(this.heroes,id);
+        this.selectedHero = HeroUtils.getById(this.guild.heroes,id);
     }
     
     setDungeon(id:number){

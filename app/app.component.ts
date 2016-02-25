@@ -2,12 +2,13 @@ import { Component }       from 'angular2/core';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
 import { HeroService } from './hero.service';
 import { DashboardComponent } from './dashboard.component';
-import { HeroesComponent } from './heroes.component';
+import { GuildComponent } from './guild.component';
 import { HeroDetailComponent } from './hero-detail.component';
 import { DuelComponent } from './duel.component';
 import { DungeonComponent } from './dungeon.component';
 import { MonsterService } from './monster.service';
 import { DungeonService } from './dungeon.service';
+import { GuildService } from './guild.service';
 
 @Component({
     selector: 'my-app',
@@ -15,7 +16,7 @@ import { DungeonService } from './dungeon.service';
         <h1>{{title}}</h1>
         <nav>
             <a [routerLink]="['Dashboard']">Dashboard</a>
-            <a [routerLink]="['Heroes']">The Guild</a>
+            <a [routerLink]="['Guild']">The Guild</a>
             <a [routerLink]="['Duel']">Duel</a>
             <a [routerLink]="['Dungeon']">Dungeon</a>
         </nav>
@@ -27,7 +28,8 @@ import { DungeonService } from './dungeon.service';
         ROUTER_PROVIDERS,
         HeroService,
         MonsterService,
-        DungeonService
+        DungeonService,
+        GuildService
     ]
 
 })
@@ -44,9 +46,9 @@ import { DungeonService } from './dungeon.service';
         component: HeroDetailComponent
     },
     {
-        path: '/heroes',
-        name: 'Heroes',
-        component: HeroesComponent
+        path: '/guild',
+        name: 'Guild',
+        component: GuildComponent
     },
     {
         path: '/duel',

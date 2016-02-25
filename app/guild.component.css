@@ -3,6 +3,11 @@
     color: white;
 }
 
+.guildname{
+    font-weight: bold;
+    color: black;
+}
+
 .heroColumn{
     min-height: 400px;
 }

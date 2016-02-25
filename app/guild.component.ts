@@ -1,16 +1,18 @@
 import {Component, OnInit, ViewChild} from 'angular2/core';
 import { Router } from 'angular2/router';
 import {Hero} from './hero';
+import {Guild} from './guild';
 import {HeroDetailComponent} from './hero-detail.component';
 import {HeroService} from './hero.service';
+import { GuildService } from './guild.service';
 
 /**
  * Just adding a comment
  */
 @Component({
-    selector: 'my-heroes',
-    templateUrl: 'app/heroes.component.html',
-    styleUrls: ['app/heroes.component.css'],
+    selector: 'guild-component',
+    templateUrl: 'app/guild.component.html',
+    styleUrls: ['app/guild.component.css'],
     
     directives: [HeroDetailComponent],
     providers: []
@@ -20,19 +22,17 @@ import {HeroService} from './hero.service';
 
 })
 
-export class HeroesComponent implements OnInit {
-  heroes: Hero[];
+export class GuildComponent implements OnInit {
+  guild: Guild;
   selectedHero: Hero;
   @ViewChild(HeroDetailComponent) heroDetail:HeroDetailComponent;
   
   constructor(
     private _router: Router,
-    private _heroService: HeroService) { }
-  getHeroes() {
-    this._heroService.getHeroes().then(heroes => this.heroes = heroes);
-  }
+    private _guildService: GuildService) { }
+   
   ngOnInit() {
-    this.getHeroes();
+    this._guildService.getGuild().then(guild => this.guild = guild);
   }
   onSelect(hero: Hero) { 
       this.selectedHero = hero; 

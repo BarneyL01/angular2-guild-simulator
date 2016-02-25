@@ -2,8 +2,12 @@
 
 <div class="columnsContainer">
     <div class="leftColumn">
-        <select #selectHero [disabled]="dungeonStarted" [ngModel]="heroes" (change)="setHero($event.target.value)">
-            <option *ngFor="#hero of heroes" [value]="hero.id">{{hero.name}}</option>
+        <select #selectHero 
+                *ngIf="guild" 
+                [disabled]="dungeonStarted" 
+                [ngModel]="guild.heroes" 
+                (change)="setHero($event.target.value)">
+            <option *ngFor="#hero of guild.heroes" [value]="hero.id">{{hero.name}}</option>
         </select>
 
         <select #selectDungeon [disabled]="dungeonStarted" [ngModel]="dungeons" (change)="setDungeon($event.target.value)">
@@ -41,7 +45,7 @@
         Monsterlist:
         <ul>
             <li *ngFor="#monster of monsters">
-                Monster: [{{monster.id}}] {{monster.name}} - {{monster.hitPoints}}/ {{monster.maxHitPoints}} 
+                Monster: ({{monster.id}}) [lvl{{monster.level}}] {{monster.name}} - {{monster.hitPoints}}/ {{monster.maxHitPoints}} 
             </li>
 
         </ul>

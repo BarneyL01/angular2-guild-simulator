@@ -23,8 +23,28 @@ export class GuildService {
           
   }*/
   
+    getGuild():Promise<Guild>{
+        console.log('GuildService.getGuild()');
+        return this.getProtoGuild().then(protoguild =>
+            this.getHeroes().then(
+                heroes =>
+                    this.buildGuild(heroes, protoguild)
+            )
+        );    
+  }
+  
+  private getProtoGuild():Promise<ProtoGuild>{
+      return Promise.resolve(GUILD);
+  }
+  
+  private getHeroes():Promise<Hero[]>{
+      return Promise.resolve(HEROES);
+  }
+  
   private buildGuild(heroes:Hero[], protoguild:ProtoGuild):Promise<Guild>{
       var guild:Guild = {
+          id:protoguild.id,
+          name:protoguild.name,
           heroes:[],
           gold:protoguild.gold
       }
