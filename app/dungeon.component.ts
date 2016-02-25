@@ -118,9 +118,8 @@ export class DungeonComponent implements OnInit {
                     }
             }
             
-            this.selectedHeroIsDead = CreatureUtils.isDead(this.selectedHero); 
-            
-            this.guild.gold += this.goldGained;           
+            this.resolveDungeonMission();
+                       
         }
     }
     
@@ -167,6 +166,15 @@ export class DungeonComponent implements OnInit {
         this.monstersFought.push({string:newMonster.name, value:DungeonUtils.calculateMonsterGold(this.selectedDungeon)});
             
         return this.fightComponent.startFight(this.selectedHero, newMonster);
+    }
+    
+    private resolveDungeonMission():void{
+        this.selectedHeroIsDead = CreatureUtils.isDead(this.selectedHero); 
+        
+        if(!this.selectedHeroIsDead){
+            this.guild.gold += this.goldGained;
+        }
+        
     }
     
 }

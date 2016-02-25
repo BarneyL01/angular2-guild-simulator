@@ -22,15 +22,19 @@ export class GuildService {
       });
           
   }*/
+    guild:Guild;
   
     getGuild():Promise<Guild>{
-        
-        return this.getProtoGuild().then(protoguild =>
-            this.getHeroes().then(
-                heroes =>
-                    this.buildGuild(heroes, protoguild)
-            )
-        );    
+        if(this.guild == null){
+            return this.getProtoGuild().then(protoguild =>
+                this.getHeroes().then(
+                    heroes =>
+                        this.buildGuild(heroes, protoguild)
+                )
+            );   
+        }else{
+            return Promise.resolve(this.guild);
+        } 
   }
   
   private getProtoGuild():Promise<ProtoGuild>{
@@ -42,17 +46,17 @@ export class GuildService {
   }
   
   private buildGuild(heroes:Hero[], protoguild:ProtoGuild):Promise<Guild>{
-      var guild:Guild = {
+      this.guild = {
           id:protoguild.id,
           name:protoguild.name,
           heroes:[],
           gold:protoguild.gold
       }
       for(let heroId of protoguild.heroes){
-          guild.heroes.push(HeroUtils.getById(heroes,heroId));
+          this.guild.heroes.push(HeroUtils.getById(heroes,heroId));
       }
       
-      return Promise.resolve(guild);
+      return Promise.resolve(this.guild);
   }
   
 }
