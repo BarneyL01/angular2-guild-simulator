@@ -17,8 +17,8 @@ export var MONSTERS: Creature[] = [
         "type": "Monster",
         "strength": 2,
         "dexterity": 1,
-        "hitPoints":8,
-        "maxHitPoints":8,
+        "hitPoints":4,
+        "maxHitPoints":4,
         "attackSpeed": 5,
         "level":2,
         "experienceIfKilled":2
