@@ -52,6 +52,10 @@ var DungeonUtils = {
             
         }
         return monsterList;
+    },
+    
+    calculateMonsterGold:function(dungeon:Dungeon):number{
+        return GeneralUtils.randomIntFromInterval(dungeon.creatureGoldMin,dungeon.creatureGoldMax);
     }
     
 }

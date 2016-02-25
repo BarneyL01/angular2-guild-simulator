@@ -14,6 +14,7 @@ import { GuildService } from './guild.service';
 import { Hit } from './hit';
 import { FightEngine } from './fight-engine';
 import {FightResult} from './fight-result';
+import {StringValuePair} from './string-value-pair';
 import HeroUtils from './hero-utils';
 import CreatureUtils from './creature-utils'
 import DungeonUtils from './dungeon-utils'
@@ -42,7 +43,7 @@ export class DungeonComponent implements OnInit {
     selectedDungeon:Dungeon;
     heroRules:HeroRule[];
     
-    monstersFought: string[] = [];
+    monstersFought: StringValuePair<number>[] = [];
     
     fightEngine:FightEngine;
     @ViewChild(FightComponent) fightComponent:FightComponent;
@@ -59,6 +60,8 @@ export class DungeonComponent implements OnInit {
     
     // @ViewChild(Selection) selectHero:Selection;
     dungeonStarted:boolean = false;
+    
+    goldGained:number = 0;
     
     constructor(
         private _router: Router,
@@ -105,10 +108,19 @@ export class DungeonComponent implements OnInit {
             for(var i = 0; i < dungeonLength; i++)
             {
                     this.fightResult = this.fightMonster();
-                    if(this.fightResult.heroFled == true) break;
+                    if(this.fightResult.heroFled == true){
+                        break;
+                    } else {
+                        // defeated monster TODO: this should probably check if they actually did.
+                        this.goldGained += this.monstersFought.length > 0 ? 
+                                            this.monstersFought[this.monstersFought.length-1].value
+                                            : 0;
+                    }
             }
             
-            this.selectedHeroIsDead = CreatureUtils.isDead(this.selectedHero);            
+            this.selectedHeroIsDead = CreatureUtils.isDead(this.selectedHero); 
+            
+            this.guild.gold += this.goldGained;           
         }
     }
     
@@ -152,7 +164,7 @@ export class DungeonComponent implements OnInit {
         // This probably should already have been checked earlier:
         if(this.checkErrors()) return;
         var newMonster:Creature = DungeonUtils.spawnMonster(this.selectedDungeon, this.monsters);
-        this.monstersFought.push(newMonster.name);
+        this.monstersFought.push({string:newMonster.name, value:DungeonUtils.calculateMonsterGold(this.selectedDungeon)});
             
         return this.fightComponent.startFight(this.selectedHero, newMonster);
     }
