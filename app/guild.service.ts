@@ -24,7 +24,7 @@ export class GuildService {
   }*/
   
     getGuild():Promise<Guild>{
-        console.log('GuildService.getGuild()');
+        
         return this.getProtoGuild().then(protoguild =>
             this.getHeroes().then(
                 heroes =>

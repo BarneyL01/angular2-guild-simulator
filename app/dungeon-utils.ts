@@ -42,8 +42,17 @@ var DungeonUtils = {
     
     generateDungeonLength: function(dungeon:Dungeon):number{
         return (GeneralUtils.randomIntFromInterval(dungeon.minDungeonLength,dungeon.maxDungeonLength));
-    }
+    },
     
+    getMonsterList:function(dungeon:Dungeon, monsters:Creature[]):Creature[]{
+        var monsterList:Creature[] = [];
+        for(let monster of dungeon.monsterArray){
+            
+            monsterList.push(CreatureUtils.getById(monsters,monster.id));
+            
+        }
+        return monsterList;
+    }
     
 }
 

@@ -35,6 +35,7 @@ export class DungeonComponent implements OnInit {
     dungeons: Dungeon[] = [];
     activeMonster:Creature;
     monsters: Creature[] = [];
+    dungeonMonsters:Creature[];
     fightCommentarys: Hit[] = [];
     fightResult: FightResult;
     selectedHero:Hero;
@@ -72,7 +73,7 @@ export class DungeonComponent implements OnInit {
         this._dungeonService.getDungeons().then(dungeons => this.dungeons = dungeons);
         this._monsterService.getMonsters().then(monsters => this.monsters = monsters);
                 
-         
+        //  console.log('monstersFought.length', this.monstersFought.length);
     }
     
     setHero(id:number){
@@ -81,6 +82,7 @@ export class DungeonComponent implements OnInit {
     
     setDungeon(id:number){
         this.selectedDungeon = DungeonUtils.getById(this.dungeons,id);
+        this.dungeonMonsters = DungeonUtils.getMonsterList(this.selectedDungeon, this.monsters);
     }
     
     startDungeon():void{
@@ -91,7 +93,7 @@ export class DungeonComponent implements OnInit {
         if(!this.enterDungeonError){
             this.dungeonStarted = true; // disables selectors
             var dungeonLength = DungeonUtils.generateDungeonLength(this.selectedDungeon);
-            console.log('dungeonLength: ', dungeonLength);
+            // console.log('dungeonLength: ', dungeonLength);
             
             
             

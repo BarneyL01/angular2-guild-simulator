@@ -31,24 +31,29 @@
     </div>  
     
     <div class="rightColumn">
-        Fight til 10% (need to change this to selectable rule)
-        
+        Fight til 10% or 2HP.(need to change this to selectable rule)
+            
         <br>
-        Monsters Fought:
+        <div *ngIf="(monstersFought.length > 0)">
+            Monsters Fought:
+            <ul  >
+                <li *ngFor="#monster of monstersFought">
+                    Fought: {{monster}}.
+                </li>
+
+            </ul>
+        </div>
+            
+        <br>
+        <div *ngIf="selectedDungeon && dungeonMonsters">
+        Monsters found in {{selectedDungeon.name}}:
         <ul>
-            <li *ngFor="#monster of monstersFought">
-                Fought: {{monster}}.
+            <li *ngFor="#monster of dungeonMonsters">
+                ({{monster.id}}) [lvl{{monster.level}}] {{monster.name}} - {{monster.hitPoints}}/ {{monster.maxHitPoints}} 
             </li>
 
         </ul>
-        <br>
-        Monsterlist:
-        <ul>
-            <li *ngFor="#monster of monsters">
-                Monster: ({{monster.id}}) [lvl{{monster.level}}] {{monster.name}} - {{monster.hitPoints}}/ {{monster.maxHitPoints}} 
-            </li>
-
-        </ul>
+        </div>
     </div>
     
     <div class="leftColumn">
