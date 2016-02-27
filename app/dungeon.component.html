@@ -1,6 +1,6 @@
 <h3>Dungeon</h3>
-
-<div class="columnsContainer">
+<div *ngIf="!guild">Loading Guild...</div>
+<div class="columnsContainer" *ngIf="guild">
     <div class="leftColumn">
         <select #selectHero 
                 *ngIf="guild" 

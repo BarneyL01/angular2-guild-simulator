@@ -8,26 +8,12 @@ import {Injectable} from 'angular2/core';
 
 @Injectable()
 export class GuildService {
-/*  getGuild():Promise<Guild>{
-      
-      return new Promise<Hero[]>(function(resolve, reject) {
-           resolve(GUILD).then(protoguild =>
-           {
-                resolve(HEROES).then(heroes =>
-                {
-                    
-                        this.buildGuild(heroes,protoguild)
-                    })
-        });
-      });
-          
-  }*/
     guild:Guild;
   
     getGuild():Promise<Guild>{
         if(this.guild == null){
-            return this.getProtoGuild().then(protoguild =>
-                this.getHeroes().then(
+            return this.getProtoGuildSlowly().then(protoguild =>
+                this.getHeroesSlowly().then(
                     heroes =>
                         this.buildGuild(heroes, protoguild)
                 )
@@ -43,6 +29,20 @@ export class GuildService {
   
   private getHeroes():Promise<Hero[]>{
       return Promise.resolve(HEROES);
+  }
+  
+  // See the "Take it slow" appendix
+  private getHeroesSlowly():Promise<Hero[]> {
+    return new Promise<Hero[]>(resolve =>
+      setTimeout(()=>resolve(HEROES), 2000) // 2 seconds
+    );
+  }
+  
+  // See the "Take it slow" appendix
+  private getProtoGuildSlowly():Promise<ProtoGuild> {
+    return new Promise<ProtoGuild>(resolve =>
+      setTimeout(()=>resolve(GUILD), 3000) // 2 seconds
+    );
   }
   
   private buildGuild(heroes:Hero[], protoguild:ProtoGuild):Promise<Guild>{

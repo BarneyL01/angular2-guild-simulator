@@ -1,6 +1,7 @@
 <h2>The Guild</h2>
-<div class="columnsContainer">
-    <div *ngIf="guild" class="leftColumn">
+<div *ngIf="!guild">Loading Guild...</div>
+<div class="columnsContainer" *ngIf="guild">
+    <div class="leftColumn">
         <div class="guildname">[{{guild.id}}] {{guild.name}}</div>
         Guild gold: ${{guild.gold}}
     </div>

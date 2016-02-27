@@ -12,16 +12,7 @@ import { GuildService } from './guild.service';
 
 @Component({
     selector: 'my-app',
-    template: `
-        <h1>{{title}}</h1>
-        <nav>
-            <a [routerLink]="['Dashboard']">Dashboard</a>
-            <a [routerLink]="['Guild']">The Guild</a>
-            <a [routerLink]="['Duel']">Duel</a>
-            <a [routerLink]="['Dungeon']">Dungeon</a>
-        </nav>
-        <router-outlet></router-outlet>
-        `,
+    templateUrl : 'app/app.component.html',
     styleUrls: ['app/app.component.css'],
     directives: [ROUTER_DIRECTIVES],
     providers: [
