@@ -2,11 +2,11 @@
 
 <div class="columnsContainer">
     <div class="leftColumn">
-        <select #select1 *ngIf="guild" [ngModel]="guild.heroes" (change)="setHero(1, $event.target.value)">
-            <option *ngFor="#hero of guild.heroes" [value]="hero.id">{{hero.name}}</option>
+        <select #select1 *ngIf="heroesByrank" [ngModel]="heroesByrank" (change)="setHero(1, $event.target.value)">
+            <option *ngFor="#hero of heroesByrank" [value]="hero.id">{{hero.name}}</option>
         </select>
-        <select #select2 *ngIf="guild" [ngModel]="guild.heroes" (change)="setHero(2, $event.target.value)">
-            <option *ngFor="#hero of guild.heroes" [value]="hero.id">{{hero.name}}</option>
+        <select #select2 *ngIf="heroesByrank" [ngModel]="heroesByrank" (change)="setHero(2, $event.target.value)">
+            <option *ngFor="#hero of heroesByrank" [value]="hero.id">{{hero.name}}</option>
         </select>
         <div>Duel between:
              <span *ngIf="selectedHero1" class="hero1name" > 

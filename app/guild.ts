@@ -3,6 +3,6 @@ import { Hero } from './hero';
 export interface Guild{
     id:number;
     name:string;
-    heroes:Hero[];
+    heroIds:number[];
     gold:number;
 }

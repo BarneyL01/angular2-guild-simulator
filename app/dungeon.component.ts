@@ -33,6 +33,7 @@ import { FightComponent } from './fight.component';
 
 export class DungeonComponent implements OnInit {
     guild: Guild;
+    heroes: Hero[];
     dungeons: Dungeon[] = [];
     activeMonster:Creature;
     monsters: Creature[] = [];
@@ -67,11 +68,20 @@ export class DungeonComponent implements OnInit {
         private _router: Router,
         private _guildService: GuildService,
         private _dungeonService: DungeonService,
-        private _monsterService: MonsterService) {
+        private _monsterService: MonsterService,
+        private _heroService:HeroService) {
     }
     
     ngOnInit() {
-        this._guildService.getGuild().then(guild => this.guild = guild);
+        this._guildService.getGuild()
+        .then(
+            guild => {
+                console.log('getGuild() succeeded');
+                this.guild = guild;
+                this._heroService.getAllHeroesById(this.guild.heroIds).then(
+                    heroes => this.heroes = heroes
+                );
+            });
             
         this._dungeonService.getDungeons().then(dungeons => this.dungeons = dungeons);
         this._monsterService.getMonsters().then(monsters => this.monsters = monsters);
@@ -80,7 +90,7 @@ export class DungeonComponent implements OnInit {
     }
     
     setHero(id:number){
-        this.selectedHero = HeroUtils.getById(this.guild.heroes,id);
+        this.selectedHero = HeroUtils.getById(this.heroes,id);
     }
     
     setDungeon(id:number){

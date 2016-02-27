@@ -24,15 +24,37 @@ import { GuildService } from './guild.service';
 
 export class GuildComponent implements OnInit {
   guild: Guild;
+  heroes: Hero[];
+  failedLoad:boolean = false;
+  failReason:string;
   selectedHero: Hero;
   @ViewChild(HeroDetailComponent) heroDetail:HeroDetailComponent;
   
   constructor(
     private _router: Router,
-    private _guildService: GuildService) { }
+    private _guildService: GuildService,
+    private _heroService: HeroService) { }
    
   ngOnInit() {
-    this._guildService.getGuild().then(guild => this.guild = guild);
+    this._guildService.getGuild()
+        .then(
+            guild => {
+                console.log('getGuild() succeeded');
+                this.guild = guild;
+                this._heroService.getAllHeroesById(this.guild.heroIds).then(
+                    heroes => this.heroes = heroes
+                );
+            }, 
+            reason => {
+                console.log('getGuild() failed');
+                this.failedLoad = true;
+                this.failReason = reason;
+            })
+         .catch(
+             reason => {
+                 console.log('getGuild() failed, CATCH');
+             }
+         );
   }
   onSelect(hero: Hero) { 
       this.selectedHero = hero; 

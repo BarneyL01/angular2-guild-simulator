@@ -1,5 +1,10 @@
 <h2>The Guild</h2>
-<div *ngIf="!guild">Loading Guild...</div>
+<span>failedLoad: {{failedLoad}} failReason:{{failReason}}</span>
+<div *ngIf="!guild && !failedLoad">Loading Guild...</div>
+<div *ngIf="failedLoad">Failed to Guild.
+    <div>Reason: {{failReason}}</div>
+    
+</div>
 <div class="columnsContainer" *ngIf="guild">
     <div class="leftColumn">
         <div class="guildname">[{{guild.id}}] {{guild.name}}</div>
@@ -8,7 +13,7 @@
     <div class="leftColumn">
         <div *ngIf="guild"> 
             <ul class="heroes">
-                <li *ngFor="#hero of guild.heroes"
+                <li *ngFor="#hero of heroes"
                     [class.selected]="hero === selectedHero"
                     (click)="onSelect(hero)">
                     <span class="badge">ID: {{hero.id}}</span> 

@@ -1,11 +1,11 @@
 import {Guild} from './guild';
-import {ProtoGuild} from './proto-guild';
+// import {ProtoGuild} from './proto-guild';
 
-export var GUILD:ProtoGuild = 
+export var GUILD:Guild = 
     {
         "id":1,
         "name": "My Lil' Guild",
-        "heroes":[11,12,13],
+        "heroIds":[11,12,13],
         "gold": 10
         
     }

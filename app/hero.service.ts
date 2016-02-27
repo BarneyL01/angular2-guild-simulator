@@ -20,5 +20,16 @@ export class HeroService {
             heroes => heroes.filter(hero => hero.id === id)[0]
         );
     }
+    
+    getAllHeroesById(ids:number[]){
+        return Promise.resolve(HEROES).then(
+            heroes => heroes.filter(hero => {
+                for(let id of ids){
+                    if(hero.id === id) return true; 
+                }
+                return false;
+            })
+        );
+    }
 
 }
