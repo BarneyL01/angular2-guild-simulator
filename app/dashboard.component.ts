@@ -4,6 +4,7 @@ import { Router } from 'angular2/router';
 import { Hero } from './hero';
 import { HeroService } from './hero.service';
 
+import {MongoConnection} from './mongo-connection';
 
 @Component({
   selector: 'my-dashboard',
@@ -13,6 +14,7 @@ import { HeroService } from './hero.service';
 
 export class DashboardComponent implements OnInit {
     heroes: Hero[] = [];
+    mongoConnection:MongoConnection = new MongoConnection();
     constructor(
         private _router: Router,
         private _heroService: HeroService) {
@@ -21,6 +23,8 @@ export class DashboardComponent implements OnInit {
     ngOnInit() {
         this._heroService.getHeroes()
       .then(heroes => this.heroes = heroes.slice(1,5));
+       
+    //    this.mongoConnection.runMongoClient();
     }
     gotoDetail(hero: Hero) {
         let link = ['HeroDetail', { id: hero.id }];
