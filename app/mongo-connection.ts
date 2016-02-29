@@ -1,9 +1,10 @@
-import mongodb = require('mongodb');
+// /// <reference path='./_scripts/typings/mongodb/mongodb.d.ts' />
 
+import mongodb = require('mongodb');
 export class MongoConnection {
     runMongoClient() {
-        var server = new mongodb.Server('localhost', 27017)
-        var db = new mongodb.Db('mydb', server, { w: 1 });
+        var server = new mongodb.Server('mongodb://ds017678.mlab.com', 17678)
+        var db = new mongodb.Db('guild-sim01', server);
         db.open(function() {});
         
         // mongodb.MongoClient.connect(`mongodb://ds017678.mlab.com:17678/guild-sim01`, 
