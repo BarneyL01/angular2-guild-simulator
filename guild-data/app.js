@@ -5,8 +5,16 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+// Make sure these requires are before the routes requires (or errors occur)
+var mongoose = require('mongoose');
+require('./models/Posts');
+require('./models/Comments');
+mongoose.connect('mongodb://localhost/guild-data');
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
+
+
 
 var app = express();
 
