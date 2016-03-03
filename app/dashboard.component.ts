@@ -26,5 +26,9 @@ export class DashboardComponent implements OnInit {
         let link = ['HeroDetail', { id: hero.id }];
         this._router.navigate(link);
     }
+    
+    createCreature(){
+        
+    }
 
 }

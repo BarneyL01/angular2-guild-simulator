@@ -31,7 +31,7 @@ mongoApp.use(cookieParser());
 mongoApp.use(express.static(path.join(__dirname, 'public')));
 
 mongoApp.use('/', routes);
-mongoApp.use('/users', users);
+// mongoApp.use('/users', users);
 
 // catch 404 and forward to error handler
 mongoApp.use(function(req, res, next) {
