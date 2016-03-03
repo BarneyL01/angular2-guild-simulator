@@ -116,28 +116,30 @@ var HeroUtils = {
     
     checkFlee: function (rule:HeroRule, hero:Hero, monster:Creature):boolean{
         // console.log('checkFlee - rule:', rule.type);
-        
+        var check:boolean = false;
         switch(rule.type)
         {
             case 'HP':
                 if(rule.thresholdTypePercentage){
-                    return (hero.hitPoints <= (hero.maxHitPoints/100*rule.threshold));
+                    check = (hero.hitPoints <= (hero.maxHitPoints/100*rule.threshold));
                 }else{
-                    return (hero.hitPoints <= rule.threshold);
+                    check = (hero.hitPoints <= rule.threshold);
                 }
-                break;
+                 break;
+                
             case 'Fear':
                 // Not implemented
                 break;
             case 'Phobia':
                 if(rule.monsterTypeMatch == null || monster.subtype == null){
-                    return false;
+                    check = false;
                 }else{
-                    return (rule.monsterTypeMatch == monster.subtype);
+                    check = (rule.monsterTypeMatch == monster.subtype);
                 }
+                break;
             
         }
-        return false;
+        return check;
     }
 }
 

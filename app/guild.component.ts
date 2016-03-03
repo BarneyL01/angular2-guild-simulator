@@ -11,8 +11,8 @@ import { GuildService } from './guild.service';
  */
 @Component({
     selector: 'guild-component',
-    templateUrl: 'app/guild.component.html',
-    styleUrls: ['app/guild.component.css'],
+    templateUrl: 'templates/guild.component.html',
+    styleUrls: ['styles/guild.component.css'],
     
     directives: [HeroDetailComponent],
     providers: []
