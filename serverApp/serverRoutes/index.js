@@ -39,6 +39,19 @@ router.get('/creatures/:id', function(req, res, next) {
   });
 });
 
+router.param('creature', function (req, res, next, id) {
+    var query = Creature.findById(id);
+    console.log('single Creature:', id);
+
+    query.exec(function (err, creature) {
+        if (err) { return next(err); }
+        if (!creature) { return next(new Error('can\'t find creature')); }
+
+        req.creature = creature;
+        return next();
+    });
+});
+
 
 // router.get('/posts', function(req, res, next) {
 //   Post.find(function(err, posts){
