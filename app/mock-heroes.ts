@@ -73,24 +73,6 @@ export var HEROES: Hero[] = [
         "experience":0,
         "actionPoints":1
     }
-    ,{"id": "21", 
-        "name": "Test Monster",  
-        "type": "Hero",
-        "armourClass": 12,
-        "hitPoints":10,
-        "maxHitPoints":10,
-        "strength": 10,
-        "dexterity": 16,
-        "reflex": 10,
-        "attackSpeed": 4,
-        "weaponAttackAccuracy": 2,
-        "damageRoll": 8,
-        "damageModifier": 0,
-        "level":1,
-        "experienceIfKilled":0,
-        "experience":0,
-        "actionPoints":1
-    }
     
 
 ];

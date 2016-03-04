@@ -5,7 +5,7 @@ export var GUILD:Guild =
     {
         "id":"1",
         "name": "My Lil' Guild",
-        "heroIds":["11","12","13","21"],
+        "heroIds":["11","12","13"],
         "gold": 10
         
     }
