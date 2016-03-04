@@ -16,7 +16,8 @@ export var HEROES: Hero[] = [
         "damageModifier": 2,
         "level":1,
         "experienceIfKilled":0,
-        "experience":0
+        "experience":0,
+        "actionPoints":0
     }
     ,{"id": "12", 
         "name": "Narco",  
@@ -33,7 +34,8 @@ export var HEROES: Hero[] = [
         "damageModifier": 2,
         "level":1,
         "experienceIfKilled":0,
-        "experience":0
+        "experience":0,
+        "actionPoints":1
     }
     ,{"id": "13", 
         "name": "Bombasto",  
@@ -50,7 +52,8 @@ export var HEROES: Hero[] = [
         "damageModifier": 2,
         "level":1,
         "experienceIfKilled":0,
-        "experience":0
+        "experience":0,
+        "actionPoints":1
     }
     ,{"id": "14", 
         "name": "Ms. Sparkle",  
@@ -67,7 +70,8 @@ export var HEROES: Hero[] = [
         "damageModifier": 2,
         "level":1,
         "experienceIfKilled":0,
-        "experience":0
+        "experience":0,
+        "actionPoints":1
     }
     ,{"id": "21", 
         "name": "Test Monster",  
@@ -84,7 +88,8 @@ export var HEROES: Hero[] = [
         "damageModifier": 0,
         "level":1,
         "experienceIfKilled":0,
-        "experience":0
+        "experience":0,
+        "actionPoints":1
     }
     
 

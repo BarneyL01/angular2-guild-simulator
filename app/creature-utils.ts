@@ -39,6 +39,10 @@ var CreatureUtils = {
         }else{
             return (creature1.id == creature2.id);
         }
+    },
+    
+    calculateDodge: function (creature:Creature):number{
+        return (creature.reflex-10)/1000;
     }
 }
 

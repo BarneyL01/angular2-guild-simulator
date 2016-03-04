@@ -3,39 +3,61 @@
     <div>
         <label>id: </label>{{hero.id}}</div>
     <div>
-        <label>name: </label>
-        <input [(ngModel)]="hero.name" placeholder="name" />
+        <label>name: </label>{{hero.name}}
     </div>
     <div>
-        <label>strength: </label>{{hero.strength}}</div>
+        <label>Armour Class (AC): </label>{{hero.armourClass}}</div>
+
     <div>
+        <label>strength: </label>{{hero.strength}} (+ {{getHeroStrModifier()}} to strength)
+    </div>
     <div>
-        <label>dexterity: </label>{{hero.dexterity}}</div>
+        <label>dexterity: </label>{{hero.dexterity}} (+ {{getHeroDexModifier()}} to accuracy)
+    </div>
     <div>
+        <label>reflex: </label>{{hero.reflex}} ({{getHeroDodge()}}% chance to dodge)
+    </div>
     <div>
-        <label>Current HP: </label>{{hero.hitPoints}}</div>
+        <label>Current HP: </label>{{hero.hitPoints}}
+    </div>
     <div>
+        <label>Max HP: </label>{{hero.maxHitPoints}}
+    </div>
+
     <div>
-        <label>Max HP: </label>{{hero.maxHitPoints}}</div>
+        <label>Attack Speed: </label>{{hero.attackSpeed}}
+
+    </div>
     <div>
+        <label>Base Attack Details </label>
+        Damage Roll: 1d{{hero.damageRoll}} + {{hero.damageModifier}}
+    </div>
     <div>
-        <label>Attack Speed: </label>{{hero.attackSpeed}}</div>
+        <label>Base Attack Accuracy Modifier: </label>{{hero.weaponAttackAccuracy}}
+    </div>
     <div>
+        <label>Level: </label>{{hero.level}}
+    </div>
     <div>
-        <label>Level: </label>{{hero.level}}</div>
-    <div>
-    <div>
-        <label>Experience Points: </label>{{hero.experience}}</div>
-    <div>
+        <label>Experience Points: </label>{{hero.experience}}
+    </div>
     <div *ngIf="hero.duelWins != null">
-        <label>Wins (duel): </label>{{hero.duelWins}}</div>
-    <div>        
+        <label>Wins (duel): </label>{{hero.duelWins}}
+    </div>        
     <div *ngIf="hero.duelLosses != null">
-        <label>Losses (duel): </label>{{hero.duelLosses}}</div>
-    <div>        
+        <label>Losses (duel): </label>{{hero.duelLosses}}
+    </div>        
     <div *ngIf="hero.rank  != null">
-        <label>rank: </label>{{hero.rank}}</div>
-    <div>  
-                
+        <label>rank: </label>{{hero.rank}}
+    </div>  
+    <span>----------------------------------------------------</span>
+    <br>
+    <span>Attack Stats Summary</span>    
+    <div>
+        <label>Attack Accuracy</label>1d20 + {{getHeroTotalAttackAccuracy()}}
+    </div>     
+    <div>
+        <label>Damage Roll</label>1d{{hero.damageRoll}} + {{getHeroTotalDamageModifier()}}
+    </div>   
     <div *ngIf="showBack"><button (click)="goBack()">Back</button></div>
 </div>

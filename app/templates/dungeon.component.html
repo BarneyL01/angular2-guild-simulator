@@ -28,7 +28,10 @@
                  into the dungeon!
         </div>
         <div>
-            <button (click)="startDungeon()">Go into dungeon</button>
+            <span *ngIf="selectedHero" > {{selectedHero.name}} has {{selectedHero.actionPoints}} action points.</span>
+        </div>
+        <div>
+            <button (click)="startDungeon()">Go into dungeon</button> Going into dungeon uses 1 Action Point.
 
             
 
@@ -37,6 +40,7 @@
         
         <div *ngIf="enterDungeonError">Problem with heading into the dungeon:
             <div *ngIf="heroUnselected">Hero not selected.</div>
+            <div *ngIf="heroNoActionPoints">Hero has no action points left.</div>
             <div *ngIf="selectedHeroIsDead">{{selectedHero.name}} is dead.</div>
             <div *ngIf="dungeonUnselected">Dungeon not selected.</div>
         </div>

@@ -53,6 +53,7 @@ export class DungeonComponent implements OnInit {
     dungeonUnselected:boolean = false;
     enterDungeonError:boolean = false;
     selectedHeroIsDead:boolean = false;
+    heroNoActionPoints:boolean = false;
     
     activeMonsterIsDead:boolean = false;
     completedDungeon:boolean = false;
@@ -109,6 +110,14 @@ export class DungeonComponent implements OnInit {
     }
     
     startDungeon():void{
+        if(this.selectedHero != null){
+            if(this.selectedHero.actionPoints <= 0){
+                this.enterDungeonError = true;
+                this.heroNoActionPoints = true;
+                return;
+            }
+        } 
+        
         this.completedDungeon = false;
         
         this.enterDungeonError = this.checkErrors();
@@ -118,7 +127,7 @@ export class DungeonComponent implements OnInit {
             var dungeonLength = DungeonUtils.generateDungeonLength(this.selectedDungeon);
             // console.log('dungeonLength: ', dungeonLength);
             
-            
+            this.selectedHero.actionPoints--; // going into dungeon consumes 1 action point.
             
             // this.activeMonster = DungeonUtils.spawnMonster(this.selectedDungeon, this.monsters);
             
@@ -181,10 +190,11 @@ export class DungeonComponent implements OnInit {
         this.heroUnselected = (this.selectedHero == null);
         this.selectedHeroIsDead = CreatureUtils.isDead(this.selectedHero);
         this.dungeonUnselected = (this.selectedDungeon == null);
+        
         // console.log('this.heroUnselected ', this.heroUnselected, 
         //             ' || this.selectedHeroIsDead ', this.selectedHeroIsDead, 
         //             ' || this.dungeonUnselected: ', this.dungeonUnselected);
-        return (this.heroUnselected || this.selectedHeroIsDead || this.dungeonUnselected);
+        return (this.heroUnselected || this.selectedHeroIsDead || this.dungeonUnselected );
     }
     
     private fightMonster():FightResult{

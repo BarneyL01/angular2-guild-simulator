@@ -28,7 +28,7 @@ var GeneralUtils = {
     },
     // modifier always stat - 10 /2 (DnD rules)
     processModifier: function(stat:number):number{
-        return (stat-10)/2;
+        return Math.floor((stat-10)/2);
     }
     
 }

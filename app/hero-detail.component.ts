@@ -3,6 +3,9 @@ import {RouteParams} from 'angular2/router';
 
 import { Hero } from './hero';
 import { HeroService } from './hero.service';
+import GeneralUtils from './general-utils';
+import CreatureUtils from './creature-utils';
+
 
 @Component({
     selector: 'hero-detail',
@@ -36,5 +39,25 @@ export class HeroDetailComponent {
     
     setShowBack(show:boolean){
         this.showBack = show;
+    }
+    
+    getHeroStrModifier():number{
+        return GeneralUtils.processModifier(this.hero.strength);
+    }
+    
+    getHeroDexModifier():number{
+        return GeneralUtils.processModifier(this.hero.dexterity);
+    }
+    
+    getHeroDodge():number{
+        return CreatureUtils.calculateDodge(this.hero)*100;
+    }
+    
+    getHeroTotalAttackAccuracy():number{
+        return this.hero.weaponAttackAccuracy + this.getHeroStrModifier();
+    }
+    
+    getHeroTotalDamageModifier():number{
+        return this.hero.damageModifier + this.getHeroDexModifier();
     }
 }
