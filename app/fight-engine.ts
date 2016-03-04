@@ -121,6 +121,7 @@ export class FightEngine {
     */
     checkHeroFlee():boolean{
         if(!HeroUtils.isHero(this.creature1)) return false;
+        if(CreatureUtils.isDead(this.creature1)) return false; // dead hero can't flee!
         
         for(let rule of this.heroRules){
             if(HeroUtils.checkFlee(rule, <Hero>this.creature1, this.creature2)) return true;

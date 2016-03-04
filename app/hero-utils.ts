@@ -1,6 +1,7 @@
 import { Hero } from './hero';
 import { HeroRule } from './hero-rule';
 import { Creature } from './creature';
+import CreatureUtils from './creature-utils';
 
 /*
     Revealing Module Pattern, for singleton function processor
@@ -117,6 +118,8 @@ var HeroUtils = {
     checkFlee: function (rule:HeroRule, hero:Hero, monster:Creature):boolean{
         // console.log('checkFlee - rule:', rule.type);
         var check:boolean = false;
+        if (CreatureUtils.isDead(hero)) return false; //dead hero can't flee.
+        
         switch(rule.type)
         {
             case 'HP':
