@@ -1,10 +1,10 @@
 <h2>The Guild</h2>
-<span>failedLoad: {{failedLoad}} failReason:{{failReason}}</span>
+
 <div *ngIf="!guild && !failedLoad">Loading Guild...</div>
-<!--<div *ngIf="failedLoad">Failed to load Guild.
+<div *ngIf="failedLoad">Failed to load Guild.
     <div>Reason: {{failReason}}</div>
     
-</div>-->
+</div>
 <div class="columnsContainer" *ngIf="guild">
     <div class="leftColumn">
         <div class="guildname">[{{guild.id}}] {{guild.name}}</div>
