@@ -2,20 +2,26 @@
 <div *ngIf="!guild">Loading Guild...</div>
 <div class="columnsContainer" *ngIf="guild && heroes">
     <div class="leftColumn">
-        <select #selectHero 
-                *ngIf="heroes" 
-                [disabled]="dungeonStarted" 
-                [ngModel]="heroes" 
-                (change)="setHero($event.target.value)">
-            <option *ngFor="#hero of heroes" [value]="hero.id">{{hero.name}}</option>
-        </select>
+        <div *ngIf="dungeonStarted">
+            <button  (click)="newSituation()">New Situation</button>
+            <br><br>
+        </div>
+        <div>
+            <select #selectHero 
+                    *ngIf="heroes" 
+                    [disabled]="dungeonStarted" 
+                    [ngModel]="heroes" 
+                    (change)="setHero($event.target.value)">
+                <option *ngFor="#hero of heroes" [value]="hero.id">{{hero.name}}</option>
+            </select>
 
-        <select #selectDungeon 
-                [disabled]="dungeonStarted" 
-                [ngModel]="dungeons" 
-                (change)="setDungeon($event.target.value)">
-            <option *ngFor="#dungeon of dungeons" [value]="dungeon.id">{{dungeon.name}}</option>
-        </select>
+            <select #selectDungeon 
+                    [disabled]="dungeonStarted" 
+                    [ngModel]="dungeons" 
+                    (change)="setDungeon($event.target.value)">
+                <option *ngFor="#dungeon of dungeons" [value]="dungeon.id">{{dungeon.name}}</option>
+            </select>
+        </div>
         <div>Send 
              <span *ngIf="selectedHero" > 
                  {{selectedHero.name}}</span>  
@@ -23,6 +29,9 @@
         </div>
         <div>
             <button (click)="startDungeon()">Go into dungeon</button>
+
+            
+
         </div>
         <br>
         
@@ -34,6 +43,7 @@
     </div>  
     
     <div class="rightColumn">
+        
         Fight til 10% or 2HP.(need to change this to selectable rule)
         <div *ngIf="guild">
            Guild gold: ${{guild.gold}}

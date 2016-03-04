@@ -90,6 +90,15 @@ export class DungeonComponent implements OnInit {
         //  console.log('monstersFought.length', this.monstersFought.length);
     }
     
+    newSituation(){
+        this.dungeonStarted = false;
+        this.completedDungeon = false;
+        this.selectedHeroIsDead = false;
+        this.goldGained = 0;
+        this.fightComponent.resetFights();
+        this.fightResult = null;
+    }
+    
     setHero(id:string){
         this.selectedHero = HeroUtils.getById(this.heroes,id);
     }
@@ -119,14 +128,20 @@ export class DungeonComponent implements OnInit {
             for(var i = 0; i < dungeonLength; i++)
             {
                     this.fightResult = this.fightMonster();
-                    if(this.fightResult.heroFled == true){
+                    
+                    if(this.checkErrors()){
                         break;
-                    } else {
-                        // defeated monster TODO: this should probably check if they actually did.
-                        this.goldGained += this.monstersFought.length > 0 ? 
-                                            this.monstersFought[this.monstersFought.length-1].value
-                                            : 0;
+                    } else{
+                        if(this.fightResult.heroFled == true){
+                            break;
+                        } else {
+                            // defeated monster TODO: this should probably check if they actually did.
+                            this.goldGained += this.monstersFought.length > 0 ? 
+                                                this.monstersFought[this.monstersFought.length-1].value
+                                                : 0;
+                        }
                     }
+                    
             }
             
             this.resolveDungeonMission();
@@ -166,7 +181,9 @@ export class DungeonComponent implements OnInit {
         this.heroUnselected = (this.selectedHero == null);
         this.selectedHeroIsDead = CreatureUtils.isDead(this.selectedHero);
         this.dungeonUnselected = (this.selectedDungeon == null);
-        
+        // console.log('this.heroUnselected ', this.heroUnselected, 
+        //             ' || this.selectedHeroIsDead ', this.selectedHeroIsDead, 
+        //             ' || this.dungeonUnselected: ', this.dungeonUnselected);
         return (this.heroUnselected || this.selectedHeroIsDead || this.dungeonUnselected);
     }
     
@@ -180,6 +197,7 @@ export class DungeonComponent implements OnInit {
     }
     
     private resolveDungeonMission():void{
+        
         this.selectedHeroIsDead = CreatureUtils.isDead(this.selectedHero); 
         
         if(!this.selectedHeroIsDead){
