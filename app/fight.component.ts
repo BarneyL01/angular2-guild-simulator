@@ -16,9 +16,9 @@ import {HeroRule} from './hero-rule';
 
 @Component({
   selector: 'fight-component',
-  templateUrl : 'templates/fight.component.html',
+  templateUrl : 'app/templates/fight.component.html',
   directives: [NgClass, FightComponent],
-  styleUrls: ['styles/fight.component.css']
+  styleUrls: ['app/styles/fight.component.css']
 })
 
 export class FightComponent{

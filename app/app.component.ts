@@ -12,8 +12,8 @@ import { GuildService } from './guild.service';
 
 @Component({
     selector: 'my-app',
-    templateUrl : 'templates/app.component.html',
-    styleUrls: ['styles/app.component.css'],
+    templateUrl : 'app/templates/app.component.html',
+    styleUrls: ['app/styles/app.component.css'],
     directives: [ROUTER_DIRECTIVES],
     providers: [
         ROUTER_PROVIDERS,

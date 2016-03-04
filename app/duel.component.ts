@@ -15,9 +15,9 @@ import CreatureUtils from './creature-utils'
 
 @Component({
   selector: 'my-duel',
-  templateUrl : 'templates/duel.component.html',
+  templateUrl : 'app/templates/duel.component.html',
   directives: [NgClass,FightComponent],
-  styleUrls: ['styles/duel.component.css']
+  styleUrls: ['app/styles/duel.component.css']
 })
 
 export class DuelComponent implements OnInit {

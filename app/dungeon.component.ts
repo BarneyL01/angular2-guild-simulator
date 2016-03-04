@@ -26,9 +26,9 @@ import { FightComponent } from './fight.component';
 
 @Component({
   selector: 'my-dungeon-component',
-  templateUrl : 'templates/dungeon.component.html',
+  templateUrl : 'app/templates/dungeon.component.html',
   directives: [NgClass, FightComponent],
-  styleUrls: ['styles/dungeon.component.css']
+  styleUrls: ['app/styles/dungeon.component.css']
 })
 
 export class DungeonComponent implements OnInit {

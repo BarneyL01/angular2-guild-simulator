@@ -3,3 +3,5 @@
 # Has become a Tycoon game simulating running a guild of heroes.
 # Typescript. 
 # Angular2.
+# gulp server to run server
+# npm start to run client

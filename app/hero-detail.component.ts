@@ -6,8 +6,8 @@ import { HeroService } from './hero.service';
 
 @Component({
     selector: 'hero-detail',
-    templateUrl: 'templates/hero-detail.component.html',
-    styleUrls: ['styles/hero-detail.component.css'],
+    templateUrl: 'app/templates/hero-detail.component.html',
+    styleUrls: ['app/styles/hero-detail.component.css'],
     inputs: ['hero']
 })
 
