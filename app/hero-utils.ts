@@ -13,7 +13,7 @@ import CreatureUtils from './creature-utils';
 */
 var HeroUtils = {
     
-    getById: function(heroes:Hero[], id:number):Hero{
+    getById: function(heroes:Hero[], id:string):Hero{
         
         for(let hero of heroes){
             
@@ -30,7 +30,7 @@ var HeroUtils = {
         return (hero1.id == hero2.id);
     },
     
-    updateDuel: function(heroes:Hero[], id:number, isWin:boolean){
+    updateDuel: function(heroes:Hero[], id:string, isWin:boolean){
         var hero:Hero = this.getById(heroes, id);
         if(hero.duelLosses == null) hero.duelLosses = 0;
         if(hero.duelWins == null) hero.duelWins = 0;  

@@ -9,7 +9,7 @@ import { Creature } from './creature';
     http://www.sitepoint.com/understanding-es6-modules/
 */
 var CreatureUtils = {
-    getById: function(creatures:Creature[], id:number):Creature{
+    getById: function(creatures:Creature[], id:string):Creature{
         if(id == null) return;
         for(let creature of creatures){
             

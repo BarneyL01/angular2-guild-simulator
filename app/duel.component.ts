@@ -72,7 +72,7 @@ export class DuelComponent implements OnInit {
     /*
         Need to get by id because doesn't bind by object.
     */
-    setHero(whichHero:number, id:number){
+    setHero(whichHero:number, id:string){
         if (whichHero == 1) {
             this.selectedHero1 = HeroUtils.getById(this.heroesByrank,id);
         } else {

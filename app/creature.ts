@@ -1,14 +1,20 @@
 export interface Creature {
-  id: number;
+  id: string;
   name: string;
   type: string;
   subtype?:string;
   
-  strength: number;
-  dexterity: number;
+  armourClass: number;
   hitPoints:number;
   maxHitPoints:number;
+  strength:number;
+  dexterity: number;
+  reflex: number;
   attackSpeed:number;
+  weaponAttackAccuracy:number;
+  damageRoll:number;
+  damageModifier:number;
   level:number;
   experienceIfKilled?:number;
+  
 }

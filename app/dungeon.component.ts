@@ -55,6 +55,7 @@ export class DungeonComponent implements OnInit {
     selectedHeroIsDead:boolean = false;
     
     activeMonsterIsDead:boolean = false;
+    completedDungeon:boolean = false;
     
     // Change this later:
     fightStarted:boolean  = false;
@@ -89,17 +90,17 @@ export class DungeonComponent implements OnInit {
         //  console.log('monstersFought.length', this.monstersFought.length);
     }
     
-    setHero(id:number){
+    setHero(id:string){
         this.selectedHero = HeroUtils.getById(this.heroes,id);
     }
     
-    setDungeon(id:number){
+    setDungeon(id:string){
         this.selectedDungeon = DungeonUtils.getById(this.dungeons,id);
         this.dungeonMonsters = DungeonUtils.getMonsterList(this.selectedDungeon, this.monsters);
     }
     
     startDungeon():void{
-        
+        this.completedDungeon = false;
         
         this.enterDungeonError = this.checkErrors();
         
@@ -151,7 +152,7 @@ export class DungeonComponent implements OnInit {
         
         var heroRule2:HeroRule = {
             type:"HP",
-            threshold:2,
+            threshold:4,
             thresholdTypePercentage:false
         };
 
@@ -173,7 +174,7 @@ export class DungeonComponent implements OnInit {
         // This probably should already have been checked earlier:
         if(this.checkErrors()) return;
         var newMonster:Creature = DungeonUtils.spawnMonster(this.selectedDungeon, this.monsters);
-        this.monstersFought.push({string:newMonster.name, value:DungeonUtils.calculateMonsterGold(this.selectedDungeon)});
+        this.monstersFought.push({id:newMonster.name, value:DungeonUtils.calculateMonsterGold(this.selectedDungeon)});
             
         return this.fightComponent.startFight(this.selectedHero, newMonster);
     }
@@ -182,6 +183,10 @@ export class DungeonComponent implements OnInit {
         this.selectedHeroIsDead = CreatureUtils.isDead(this.selectedHero); 
         
         if(!this.selectedHeroIsDead){
+            if(this.fightResult.heroFled != true){
+                // Hero completed dungeon.
+                this.completedDungeon = true;
+            }
             this.guild.gold += this.goldGained;
         }
         

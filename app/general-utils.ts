@@ -25,6 +25,10 @@ var GeneralUtils = {
         }
 
         return objectCopy;
+    },
+    // modifier always stat - 10 /2 (DnD rules)
+    processModifier: function(stat:number):number{
+        return (stat-10)/2;
     }
     
 }

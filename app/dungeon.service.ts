@@ -8,7 +8,7 @@ export class DungeonService {
     return Promise.resolve(DUNGEONS);
   }
   
-    getDungeon(id: number) {
+    getDungeon(id: string) {
         return Promise.resolve(DUNGEONS).then(
             dungeons => dungeons.filter(dungeon => dungeon.id === id)[0]
         );

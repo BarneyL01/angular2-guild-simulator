@@ -14,8 +14,7 @@ export class FightEngine {
     // fightCommentary:Hit[];
     fightResult:FightResult;
     
-    accuracyDice:number = 6;
-    strengthDice:number = 6;
+    accuracyDice:number = 20;
     
     creature1NextHit:number;
     creature2NextHit:number;
@@ -111,7 +110,11 @@ export class FightEngine {
         return this.fightResult;
     }
     
-    checkCreatureDeath():boolean{
+    /**
+     * Private functions
+     */
+    
+    private checkCreatureDeath():boolean{
         return (CreatureUtils.isDead(this.creature1) || 
                 CreatureUtils.isDead(this.creature2));
     }
@@ -119,7 +122,7 @@ export class FightEngine {
     /** 
      * Check if there is any reason for hero to flee.
     */
-    checkHeroFlee():boolean{
+    private checkHeroFlee():boolean{
         if(!HeroUtils.isHero(this.creature1)) return false;
         if(CreatureUtils.isDead(this.creature1)) return false; // dead hero can't flee!
         
@@ -130,10 +133,10 @@ export class FightEngine {
         return false;
     }
     
-    creatureAttack(attacker:Creature, defender:Creature):Hit{
+    private creatureAttack(attacker:Creature, defender:Creature):Hit{
         var damage:number;
         if(this.hitSucceed(attacker, defender)){
-            damage = GeneralUtils.rollDice(this.strengthDice, attacker.strength);
+            damage = this.calculateDamage(attacker);
             // update hp
             defender.hitPoints -= damage;
             
@@ -149,16 +152,33 @@ export class FightEngine {
         }
     }
     
-    updateHp(creature:Creature, damage:number){
+    private updateHp(creature:Creature, damage:number){
         creature.hitPoints = Math.max(creature.hitPoints-damage, 0);
     }
     
-    hitSucceed(attacker:Creature, defender:Creature):boolean{
-        var attackRoll:number = GeneralUtils.rollDice(this.accuracyDice, attacker.dexterity);
-        var defendRoll:number = GeneralUtils.rollDice(this.accuracyDice, defender.dexterity);
-        // console.log('hitSucceed: ', attackRoll, ' against ', defendRoll);
-        return (attackRoll > defendRoll);
+    private hitSucceed(attacker:Creature, defender:Creature):boolean{
+        if(this.calculateDodge(defender) ) return false;
+        
+        var attackRoll:number = GeneralUtils.rollDice(this.accuracyDice, 
+                                                       (GeneralUtils.processModifier(attacker.dexterity)
+                                                        + attacker.weaponAttackAccuracy));
+        
+        // console.log('hitSucceed: ', attackRoll, ' against ', defender.armourClass);
+        return (attackRoll > defender.armourClass);
     }
+    
+    private calculateDamage(attacker:Creature):number{
+        return GeneralUtils.rollDice(attacker.damageRoll, 
+                                        (GeneralUtils.processModifier(attacker.strength)
+                                        + attacker.damageModifier)
+                                        );
+    }
+    
+    private calculateDodge(defender:Creature):boolean{
+        var chanceOfDodge = (defender.reflex -10)/1000;
+        return chanceOfDodge > GeneralUtils.randomIntFromInterval(0,100);
+    }
+    
     
     
         

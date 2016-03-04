@@ -15,13 +15,13 @@ export class HeroService {
     );
   }
   
-    getHero(id: number) {
+    getHero(id: string) {
         return Promise.resolve(HEROES).then(
             heroes => heroes.filter(hero => hero.id === id)[0]
         );
     }
     
-    getAllHeroesById(ids:number[]){
+    getAllHeroesById(ids:string[]){
         return Promise.resolve(HEROES).then(
             heroes => heroes.filter(hero => {
                 for(let id of ids){

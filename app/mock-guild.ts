@@ -3,9 +3,9 @@ import {Guild} from './guild';
 
 export var GUILD:Guild = 
     {
-        "id":1,
+        "id":"1",
         "name": "My Lil' Guild",
-        "heroIds":[11,12,13],
+        "heroIds":["11","12","13","21"],
         "gold": 10
         
     }

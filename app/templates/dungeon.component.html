@@ -43,7 +43,7 @@
             Monsters Fought:
             <ul  >
                 <li *ngFor="#monster of monstersFought">
-                    Fought: {{monster.string}} (had {{monster.value}} gold).
+                    Fought: {{monster.id}} (had {{monster.value}} gold).
                 </li>
 
             </ul>
@@ -63,10 +63,6 @@
     
     <div class="leftColumn">
         <div *ngIf="dungeonStarted">Dungeon Entered</div>
-        <div *ngIf="activeMonster">
-            <div>Encountered: {{activeMonster.name}} (level {{activeMonster.level}}) </div>
-            <div><label>id: </label>{{activeMonster.id}}</div>
-        </div>
         <!--Fight Commentary text:-->
         <fight-component #fightComponent></fight-component>
         
@@ -74,6 +70,7 @@
         <div *ngIf="fightResult && !selectedHeroIsDead">
             <div *ngIf="fightResult.heroFled">{{selectedHero.name}} has fled the dungeon.</div>
         </div>
-        <div *ngIf="!selectedHeroIsDead && goldGained > 0">{{selectedHero.name}} gained {{goldGained}} for the guild.</div>
+        <div *ngIf="completedDungeon">{{selectedHero.name}} completed the Dungeon!</div>
+        <div *ngIf="!selectedHeroIsDead && goldGained > 0">{{selectedHero.name}} gained {{goldGained}} gold for the guild.</div>
     </div>
 </div>

@@ -2,11 +2,11 @@ import { Dungeon } from './dungeon';
 import { Creature } from './creature';
 import GeneralUtils from './general-utils';
 import CreatureUtils from './creature-utils';
-import {IdValuePair} from './id-value-pair';
+import {StringValuePair} from './string-value-pair';
 
 var DungeonUtils = {
     
-    getById: function(dungeons:Dungeon[], id:number):Dungeon{
+    getById: function(dungeons:Dungeon[], id:string):Dungeon{
         
         for(let dungeon of dungeons){
             
@@ -18,7 +18,7 @@ var DungeonUtils = {
     },
     
     spawnMonster: function(dungeon:Dungeon, monsters:Creature[]):Creature{
-        var monsterWeights:IdValuePair<number>[] = [];
+        var monsterWeights:StringValuePair<number>[] = [];
         var totalMonsterWeights:number = 0;
         for(let monster of dungeon.monsterArray){
             totalMonsterWeights += monster.value;
@@ -28,7 +28,7 @@ var DungeonUtils = {
         
         var pickMonster:number = GeneralUtils.randomNumber(totalMonsterWeights);
         // console.log('spawnMonster - pickMonster', pickMonster);
-        var pickedMonsterId:number;
+        var pickedMonsterId:string;
         for(let weight of monsterWeights){
             // console.log('spawnMonster - monsterWeights', weight.id, ': ', weight.value);
             if(pickMonster <= weight.value){

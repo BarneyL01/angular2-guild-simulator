@@ -8,7 +8,7 @@ export class MonsterService {
     return Promise.resolve(MONSTERS);
   }
   
-    getMonster(id: number) {
+    getMonster(id: string) {
         return Promise.resolve(MONSTERS).then(
             monsters => monsters.filter(monster => monster.id === id)[0]
         );

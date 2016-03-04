@@ -39,20 +39,20 @@ export class GuildComponent implements OnInit {
     this._guildService.getGuild()
         .then(
             guild => {
-                console.log('getGuild() succeeded');
+                // console.log('getGuild() succeeded');
                 this.guild = guild;
                 this._heroService.getAllHeroesById(this.guild.heroIds).then(
                     heroes => this.heroes = heroes
                 );
             }, 
             reason => {
-                console.log('getGuild() failed');
+                // console.log('getGuild() failed');
                 this.failedLoad = true;
                 this.failReason = reason;
             })
          .catch(
              reason => {
-                 console.log('getGuild() failed, CATCH');
+                //  console.log('getGuild() failed, CATCH');
              }
          );
   }

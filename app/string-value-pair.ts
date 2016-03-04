@@ -1,4 +1,4 @@
 export interface StringValuePair<T>{
-    string: string;
+    id: string;
     value: T;
 }

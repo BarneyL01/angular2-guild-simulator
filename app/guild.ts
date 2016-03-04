@@ -1,8 +1,8 @@
 import { Hero } from './hero';
 
 export interface Guild{
-    id:number;
+    id:string;
     name:string;
-    heroIds:number[];
+    heroIds:string[];
     gold:number;
 }
