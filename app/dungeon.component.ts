@@ -77,7 +77,7 @@ export class DungeonComponent implements OnInit {
         this._guildService.getGuild()
         .then(
             guild => {
-                console.log('getGuild() succeeded');
+                // console.log('getGuild() succeeded');
                 this.guild = guild;
                 this._heroService.getAllHeroesById(this.guild.heroIds).then(
                     heroes => this.heroes = heroes
