@@ -1,1 +1,2 @@
 "start": "concurrent \"npm run tsc:w\" \"npm run lite\" \"node ./bin/www \" ",
+"start": "concurrent \"npm run tsc:w\" \"npm run lite\"  "
