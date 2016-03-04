@@ -7,12 +7,10 @@ var bodyParser = require('body-parser');
 
 // Make sure these requires are before the routes requires (or errors occur)
 var mongoose = require('mongoose');
-require('../models/creature-schema');
-require('../models/Posts');
-require('../models/Comments');
+require('./models/creature-schema');
 mongoose.connect('mongodb://localhost/guild-data');
 
-var routes = require('../serverRoutes/index');
+var routes = require('./serverRoutes/index');
 // var users = require('./routes/users');
 
 

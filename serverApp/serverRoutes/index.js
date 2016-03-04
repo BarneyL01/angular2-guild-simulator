@@ -1,21 +1,18 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var Post = mongoose.model('Post');
-var Comment = mongoose.model('Comment');
 var Creature = mongoose.model('Creature');
 
-/* GET home page. */
-// router.get('/', function(req, res, next) {
-//   res.render('../index', { title: 'Express' });
-// });
+/**
+ * Creature Routes:
+ */
 router.get('/creatures', function(req, res, next) {
-    res.json({name:'hello'});
-//   Creature.find(function(err, creatures){
-//     if(err){ return next(err); }
+    
+  Creature.find(function(err, creatures){
+    if(err){ return next(err); }
 
-//     res.json(creatures);
-//   });
+    res.json(creatures);
+  });
 });
 
 router.post('/creatures', function (req, res, next) {
@@ -27,6 +24,21 @@ router.post('/creatures', function (req, res, next) {
         res.json(creature);
     });
 });
+
+router.get('/creatures/:id', function(req, res, next) {
+    var id = router.params.id;
+    console.log('blah:', id);
+  var query = Creature.findById(id);
+
+  query.exec(function (err, creature){
+    if (err) { return next(err); }
+    if (!creature) { return next(new Error('can\'t find creature: ' + id)); }
+
+    req.creature = creature;
+    return next();
+  });
+});
+
 
 // router.get('/posts', function(req, res, next) {
 //   Post.find(function(err, posts){
