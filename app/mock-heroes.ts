@@ -17,7 +17,8 @@ export var HEROES: Hero[] = [
         "level":1,
         "experienceIfKilled":0,
         "experience":0,
-        "actionPoints":0
+        "actionPoints":0,
+        "maxActionPoints":1
     }
     ,{"id": "12", 
         "name": "Narco",  
@@ -35,7 +36,8 @@ export var HEROES: Hero[] = [
         "level":1,
         "experienceIfKilled":0,
         "experience":0,
-        "actionPoints":1
+        "actionPoints":0,
+        "maxActionPoints":1
     }
     ,{"id": "13", 
         "name": "Bombasto",  
@@ -53,7 +55,8 @@ export var HEROES: Hero[] = [
         "level":1,
         "experienceIfKilled":0,
         "experience":0,
-        "actionPoints":1
+        "actionPoints":0,
+        "maxActionPoints":1
     }
     ,{"id": "14", 
         "name": "Ms. Sparkle",  
@@ -71,7 +74,8 @@ export var HEROES: Hero[] = [
         "level":1,
         "experienceIfKilled":0,
         "experience":0,
-        "actionPoints":1
+        "actionPoints":1,
+        "maxActionPoints":1
     }
     
 

@@ -28,6 +28,9 @@ export class GuildComponent implements OnInit {
   failedLoad:boolean = false;
   failReason:string;
   selectedHero: Hero;
+  showDayMessage:boolean = false;
+  showAPMessage:boolean = false;
+  messageAnyway:string = "";
   @ViewChild(HeroDetailComponent) heroDetail:HeroDetailComponent;
   
   constructor(
@@ -60,6 +63,52 @@ export class GuildComponent implements OnInit {
       this.selectedHero = hero; 
       this.heroDetail.setHero(this.selectedHero);
       this.heroDetail.setShowBack(false);
+      
+      this.showDayMessage = false;
+  }
+  
+  nextDay() {
+      
+      if (!this.showAPMessage) {
+          //   Check hero action points still usable.
+          if (this.checkAPs()) {
+
+              this.showAPMessage = true;
+              this.messageAnyway = "Anyway";
+              return;
+          } else {
+              this.showAPMessage = false;
+              this.messageAnyway = "";
+          }
+      } else {
+          //   Player clicked the button anyway, go ahead and Next Day.
+          this.showAPMessage = false;
+          this.messageAnyway = "";
+      }
+      
+
+
+      for (let hero of this.heroes) {
+          hero.actionPoints = hero.maxActionPoints;
+          hero.hitPoints = Math.min(hero.maxHitPoints, (hero.hitPoints + this.guild.hpRefreshAmount));
+      }
+      if (this.guild.day >= 7) {
+          this.guild.week++;
+          this.guild.day = 1;
+      } else {
+          this.guild.day++;
+      }
+
+
+      this.showDayMessage = true;
+  }
+  
+  private checkAPs():boolean{
+      
+      for (let hero of this.heroes) {
+          if(hero.actionPoints >0) return true;
+      }
+      return false;
   }
 /*  gotoDetail() {
     // this._router.navigate(['HeroDetail', { id: this.selectedHero.id }]);

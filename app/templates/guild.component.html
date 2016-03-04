@@ -9,16 +9,32 @@
     <div class="leftColumn">
         <div class="guildname">[{{guild.id}}] {{guild.name}}</div>
         Guild gold: ${{guild.gold}}
+        <div>
+            Week {{guild.week}}, Day {{guild.day}}
+        </div>
+        <div>
+            <button (click)="nextDay()">Next Day {{messageAnyway}}</button> (Refresh Hero Action Points. Heroes Heal {{guild.hpRefreshAmount}} HPs.)
+        </div>
+        <div *ngIf="showAPMessage">
+            You still have Action Points to use
+        </div>
+        <div *ngIf="showDayMessage">
+            Day updated!
+        </div>
+         <ul>
+             <li>Each week you need to pay your heroes!</li>
+         </ul>
     </div>
     <div class="leftColumn">
-        <div *ngIf="guild"> 
+        <div *ngIf="guild"> The Heroes of your Guild:
             <ul class="heroes">
                 <li *ngFor="#hero of heroes"
                     [class.selected]="hero === selectedHero"
                     (click)="onSelect(hero)">
                     <span class="badge">ID: {{hero.id}}</span> 
-                        <span class="heroName">{{hero.name}}</span> 
-                        <span class="status">HP: {{hero.hitPoints}}/{{hero.maxHitPoints}}</span> 
+                        <span class="heroName">{{hero.name}} </span> 
+                        <span class="status">HP: {{hero.hitPoints}}/{{hero.maxHitPoints}}. APs:{{hero.actionPoints}} .</span> 
+                        
                 </li>
 
             </ul>

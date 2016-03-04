@@ -5,4 +5,7 @@ export interface Guild{
     name:string;
     heroIds:string[];
     gold:number;
+    day:number;
+    week:number;
+    hpRefreshAmount:number;
 }

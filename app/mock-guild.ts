@@ -6,7 +6,10 @@ export var GUILD:Guild =
         "id":"1",
         "name": "My Lil' Guild",
         "heroIds":["11","12","13"],
-        "gold": 10
+        "gold": 10,
+        "day":1,
+        "week":1,
+        "hpRefreshAmount":20
         
     }
 
