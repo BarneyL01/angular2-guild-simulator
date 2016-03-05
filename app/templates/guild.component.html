@@ -1,8 +1,8 @@
 <h2>The Guild</h2>
 
 <div *ngIf="!guild && !failedLoad">Loading Guild...</div>
-<div *ngIf="failedLoad">Failed to load Guild.
-    <div>Reason: {{failReason}}</div>
+<div *ngIf="failedLoad" class="error" >Failed to load Guild.
+    <div class="error"  >Reason: {{failReason}}</div>
     
 </div>
 <div class="columnsContainer" *ngIf="guild">
@@ -15,15 +15,19 @@
         <div>
             <button (click)="nextDay()">Next Day {{messageAnyway}}</button> (Refresh Hero Action Points. Heroes Heal {{guild.hpRefreshAmount}} HPs.)
         </div>
-        <div *ngIf="showAPMessage">
+        <div *ngIf="showAPMessage" class="error" >
             You still have Action Points to use
         </div>
         <div *ngIf="showDayMessage">
             Day updated!
         </div>
+        <br>
+        <div>
+            Things you need to know:
          <ul>
              <li>Each week you need to pay your heroes!</li>
          </ul>
+         </div>
     </div>
     <div class="leftColumn">
         <div *ngIf="guild"> The Heroes of your Guild:
