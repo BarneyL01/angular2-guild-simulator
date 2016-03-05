@@ -44,11 +44,15 @@
             <div *ngIf="selectedHeroIsDead">{{selectedHero.name}} is dead.</div>
             <div *ngIf="dungeonUnselected">Dungeon not selected.</div>
         </div>
+        
+        <div>
+            <hero-update #heroUpdateComponent></hero-update>
+        </div>
     </div>  
     
     <div class="rightColumn">
         
-        Fight til 10% or 2HP.(need to change this to selectable rule)
+        Fight til 10% or 4HP.(need to change this to selectable rule)
         <div *ngIf="guild">
            Guild gold: ${{guild.gold}}
         </div>    

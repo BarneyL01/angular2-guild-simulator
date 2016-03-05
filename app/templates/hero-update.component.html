@@ -1,0 +1,23 @@
+<div *ngIf="hero"> [debug line:] Hero Update Component: {{hero.name}} set.
+    <br>
+    <div *ngIf="didHeroLevelUp" > 
+        <h4>{{hero.name}} (Hero Type: {{hero.heroType}}) has leveled up!</h4>
+        <ul>
+            <li>Max HP increased: {{originalMaxHitPoints}} to  
+                {{hero.maxHitPoints}} (+ {{hero.maxHitPoints - originalMaxHitPoints}})
+            </li>
+            <li>Strength increased: {{originalStrength}} to  
+                {{hero.strength}} (+ {{hero.strength - originalStrength}})
+            </li>
+            <li>Dexterity increased: {{originalDexterity}} to  
+                {{hero.dexterity}} (+ {{hero.dexterity - originalDexterity}})
+            </li>
+            <li>Reflex increased: {{originalReflex}} to  
+                {{hero.reflex}} (+ {{hero.reflex - originalReflex}})
+            </li>
+            <li>AC increased: {{originalArmourClass}} to  
+                {{hero.armourClass}} (+ {{hero.armourClass - originalArmourClass}})
+            </li>
+        </ul>
+    </div>
+</div>

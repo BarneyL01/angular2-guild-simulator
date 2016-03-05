@@ -8,6 +8,7 @@ export interface Hero extends Creature{
     items?:Item[];
     actionPoints:number;
     maxActionPoints:number;
+    heroType:string;
     /*fear:number;
     happiness:number;
     obviousTrait:number;

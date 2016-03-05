@@ -143,6 +143,66 @@ var HeroUtils = {
             
         }
         return check;
+    },
+    
+    getExperienceThreshold(hero:Hero):number{
+        var thresholds:number[] = [5, 20, 50, 999999];
+        if(hero.level > thresholds.length) {
+            // TO-Implement: what to do if max level
+            return 0; 
+        }else{
+            return thresholds[hero.level-1];
+        }
+    },
+    
+    willHeroLevelUp(hero:Hero):boolean{
+        return (hero.experience >= HeroUtils.getExperienceThreshold(hero) && HeroUtils.getExperienceThreshold(hero) != 0);
+    },
+    
+    checkAndUpdateHero(hero:Hero):void{
+        if(hero == null) return;
+        
+        if(HeroUtils.willHeroLevelUp(hero)){
+            // Level up!
+            hero.level++;
+            
+            HeroUtils.levelUpStats(hero);
+        }
+    },
+    
+    /**
+     * Update Stats of hero based on heroType
+     * @param hero Hero to update
+     */
+    levelUpStats(hero:Hero):void{
+        // All Stats go up by 1.
+        hero.maxHitPoints++;
+        hero.strength++;
+        hero.dexterity++;
+        hero.armourClass++;
+        hero.reflex++;
+        
+        // heroType stats increase by 1 more.
+        // heroType: strength, dexterity, reflex, health, toughness (gains AC)
+        switch(hero.heroType)
+        {
+            case 'strength':
+                hero.strength++;
+                 break;
+            case 'dexterity':
+                hero.dexterity++;
+                 break;
+            case 'reflex':
+                hero.reflex++;
+                 break;
+            case 'health':
+                hero.maxHitPoints++;
+                 break;
+            case 'toughness':
+                hero.armourClass++;
+                 break;
+        }
+        return;
     }
 }
 

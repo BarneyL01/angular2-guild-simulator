@@ -5,6 +5,7 @@ import { Hero } from './hero';
 import { HeroService } from './hero.service';
 import GeneralUtils from './general-utils';
 import CreatureUtils from './creature-utils';
+import HeroUtils from './hero-utils';
 
 
 @Component({
@@ -59,5 +60,9 @@ export class HeroDetailComponent {
     
     getHeroTotalDamageModifier():number{
         return this.hero.damageModifier + this.getHeroDexModifier();
+    }
+    
+    getHeroXPThreshold(hero:Hero):number{
+        return HeroUtils.getExperienceThreshold(hero);
     }
 }

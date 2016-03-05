@@ -39,7 +39,10 @@
         <label>Level: </label>{{hero.level}}
     </div>
     <div>
-        <label>Experience Points: </label>{{hero.experience}}
+        <label>Experience Points: </label>{{hero.experience}}/{{getHeroXPThreshold(hero)}}
+    </div>
+    <div>
+        <label>Hero Type: </label>{{hero.heroType}}
     </div>
     <div *ngIf="hero.duelWins != null">
         <label>Wins (duel): </label>{{hero.duelWins}}

@@ -22,12 +22,13 @@ import DungeonUtils from './dungeon-utils'
 import {HeroRule} from './hero-rule';
 
 import { FightComponent } from './fight.component';
+import { HeroUpdateComponent } from './hero-update.component';
 
 
 @Component({
   selector: 'my-dungeon-component',
   templateUrl : 'app/templates/dungeon.component.html',
-  directives: [NgClass, FightComponent],
+  directives: [NgClass, FightComponent, HeroUpdateComponent],
   styleUrls: ['app/styles/dungeon.component.css']
 })
 
@@ -48,6 +49,7 @@ export class DungeonComponent implements OnInit {
     
     fightEngine:FightEngine;
     @ViewChild(FightComponent) fightComponent:FightComponent;
+    @ViewChild(HeroUpdateComponent) heroUpdateComponent:HeroUpdateComponent;
     
     heroUnselected:boolean = false;
     dungeonUnselected:boolean = false;
@@ -98,6 +100,8 @@ export class DungeonComponent implements OnInit {
         this.goldGained = 0;
         this.fightComponent.resetFights();
         this.fightResult = null;
+        
+        this.heroUpdateComponent.reset();
     }
     
     setHero(id:string){
@@ -207,7 +211,7 @@ export class DungeonComponent implements OnInit {
     }
     
     private resolveDungeonMission():void{
-        
+        this.heroUpdateComponent.setHero(this.selectedHero);
         this.selectedHeroIsDead = CreatureUtils.isDead(this.selectedHero); 
         
         if(!this.selectedHeroIsDead){
